@@ -3,12 +3,12 @@
 {% block body %}
     <div class="card mt-5 shadow-sm">
         <div class="card-header">
-            <h3 class="mb-0">Incidence Details</h3>
+            <h3 class="mb-0">Details D'Incidence</h3>
         </div>
         <div class="card-body">
             <p><strong>Type:</strong> {{ incidence.type }}</p>
             <p><strong>Description:</strong> {{ incidence.description }}</p>
-            <a href="{{ path('incident_list') }}" class="btn btn-secondary">Révenir à la Liste</a>
+            <a href="{{ path('incident_list') }}" class="btn btn-secondary">Retour à la liste</a>
         </div>
     </div>
 {% endblock %}

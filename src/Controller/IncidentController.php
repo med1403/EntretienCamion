@@ -42,7 +42,7 @@ class IncidentController extends AbstractController
         ]);
     }
 
-    #[Route('/incident/{id}', name: 'incident_show')]
+    #[Route('/incident/{id}', name: 'incident_show', requirements: ['id' => '\d+'])]
     public function show(Incidence $incidence): Response
     {
         return $this->render('incident/show.html.twig', [

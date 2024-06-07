@@ -27,11 +27,10 @@ class IncidenceRepository extends ServiceEntityRepository
     public function findByCriteria($criteria)
     {
         return $this->createQueryBuilder('i')
-            ->andWhere('i.description LIKE :criteria')
+            ->andWhere('i.description LIKE :criteria OR i.type LIKE :criteria')
             ->setParameter('criteria', '%'.$criteria.'%')
             ->orderBy('i.id', 'ASC')
             ->getQuery()
             ->getResult();
     }
 }
-// Compare this snippet from src/Repository/IncidenceRepository.php:
