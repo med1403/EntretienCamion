@@ -1,6 +1,6 @@
 <!-- templates/base.html.twig -->
 <!DOCTYPE html>
-<html>
+<html lang="fr">
     <head>
         <meta charset="UTF-8">
         <title>{% block title %}Welcome!{% endblock %}</title>
@@ -18,14 +18,6 @@
                 max-width: 800px;
                 margin: auto;
             }
-            .card-header {
-                background-color: #007bff;
-                color: white;
-            }
-            .btn-primary {
-                background-color: #007bff;
-                border: none;
-            }
         </style>
         {% block stylesheets %}{% endblock %}
     </head>
@@ -40,6 +32,10 @@
         <!-- Add flatpickr JS -->
         <script src="https://cdn.jsdelivr.net/npm/flatpickr"></script>
         <script>
+            function flatpickr(s, param2) {
+                console.log('flatpickr', s, param2);
+            }
+
             document.addEventListener('DOMContentLoaded', function() {
                 flatpickr(".js-datepicker", {
                     enableTime: true,
