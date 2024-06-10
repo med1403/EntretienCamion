@@ -1,9 +1,18 @@
 {% extends 'base.html.twig' %}
+{% block title %}Liste d'Incident{% endblock %}
+{% block stylesheets %}
+    <style>
+        .card {
+            border-radius: 0;
+        }
+
+    </style>
+{% endblock %}
 
 {% block body %}
     <div class="card mt-5 shadow-sm">
         <div class="card-header">
-            <h3 class="mb-0">Liste d'Incident</h3>
+            <h3 class="mb-0"><i class="fa fa-list-alt"></i> Liste d'Incident</h3>
         </div>
         <div class="card-body">
             <ul class="list-group">
