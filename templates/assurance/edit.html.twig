@@ -7,6 +7,15 @@
         .card {
             border-radius: 0;
         }
+        .delete{
+            border: 1px solid black;
+            width: 150px;
+            border-radius: 5px;
+            background-color: red;
+            color: white;
+            height: 40px;
+            text-align: center;
+        }
     </style>
 {% endblock %}
 
@@ -22,7 +31,10 @@
                     <a href="{{ path('app_assurance_index') }}" class="btn btn-secondary">
                         <i class="fas fa-arrow-left"></i> Retour à la liste
                     </a>
-                    {{ include('assurance/_delete_form.html.twig', { 'class': 'd-inline' }) }}
+                    <div class="delete btn btn-danger">
+                        {{ include('assurance/_delete_form.html.twig', { 'class': 'd-inline' }) }}
+                    </div>
+
                 </div>
             </div>
         </div>

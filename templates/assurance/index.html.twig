@@ -12,7 +12,7 @@
 
 {% block body %}
     <div class="container mt-5">
-        <h1 class="mb-4"><i class="fas fa-list"></i> Liste d'Assurance</h1>
+        <h1 class="mb-4"><i class="fas fa-table"></i> Liste d'Assurance</h1>
         <div class="table-responsive">
             <table class="table table-bordered">
                 <thead>
@@ -40,6 +40,7 @@
                             <a href="{{ path('app_assurance_edit', {'id': assurance.id}) }}" class="btn btn-primary btn-sm">
                                 <i class="fas fa-edit"></i> Modifier
                             </a>
+
                         </td>
                     </tr>
                 {% else %}
