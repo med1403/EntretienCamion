@@ -1,11 +1,60 @@
 {% extends 'base.html.twig' %}
 
-{% block title %}New Assurance{% endblock %}
+{% block title %}Nouvelle Assurance{% endblock %}
+
+{% block stylesheets %}
+    <style>
+        .card {
+            border-radius: 0;
+        }
+    </style>
+{% endblock %}
+
+{% block javascripts %}
+    <script>
+        document.addEventListener('DOMContentLoaded', function () {
+            function flatpickr(s, param2) {
+
+            }
+
+            flatpickr(".js-datepicker", {
+                enableTime: true,
+                dateFormat: "Y-m-d H:i",
+            });
+        });
+    </script>
+{% endblock %}
 
 {% block body %}
-    <h1>Create new Assurance</h1>
-
-    {{ include('assurance/_form.html.twig') }}
-
-    <a href="{{ path('app_assurance_index') }}">back to list</a>
+    <div class="card mt-5 shadow-sm mx-auto" style="max-width: 600px;">
+        <div class="card-header">
+            <h3 class="mb-0"><i class="fas fa-plus-circle"></i> Nouvelle Assurance</h3>
+        </div>
+        <div class="card-body">
+            {{ form_start(form) }}
+            <div class="form-group">
+                {{ form_label(form.dateDebut) }}
+                {{ form_widget(form.dateDebut, {'attr': {'class': 'form-control js-datepicker', 'placeholder': 'Enter the start date'}}) }}
+            </div>
+            <div class="form-group">
+                {{ form_label(form.dateFin) }}
+                {{ form_widget(form.dateFin, {'attr': {'class': 'form-control js-datepicker', 'placeholder': 'Enter the end date'}}) }}
+            </div>
+            <div class="form-group">
+                {{ form_label(form.compagnie) }}
+                {{ form_widget(form.compagnie, {'attr': {'class': 'form-control', 'placeholder': 'Enter the company name'}}) }}
+            </div>
+            <div class="form-group">
+                {{ form_label(form.numPolice) }}
+                {{ form_widget(form.numPolice, {'attr': {'class': 'form-control', 'placeholder': 'Enter the policy number'}}) }}
+            </div>
+            <div class="form-group">
+                {{ form_label(form.camion) }}
+                {{ form_widget(form.camion, {'attr': {'class': 'form-control', 'placeholder': 'Select the truck'}}) }}
+            </div>
+            <button class="btn btn-primary"><i class="fas fa-save"></i> Enregistrer</button>
+            {{ form_end(form) }}
+            <a href="{{ path('app_assurance_index') }}" class="btn btn-secondary mt-3"><i class="fas fa-arrow-left"></i> Retour à la liste</a>
+        </div>
+    </div>
 {% endblock %}
