@@ -17,11 +17,11 @@ class ChauffeurType extends AbstractType
             ->add('nom')
             ->add('prenom')
             ->add('contact')
-            ->add('historiques', EntityType::class, [
-                'class' => Historique::class,
-'choice_label' => 'id',
-'multiple' => true,
-            ])
+//             ->add('historiques', EntityType::class, [
+//                 'class' => Historique::class,
+// 'choice_label' => 'id',
+// 'multiple' => true,
+//             ])
         ;
     }
 

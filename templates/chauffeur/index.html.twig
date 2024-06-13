@@ -1,39 +1,121 @@
-{% extends 'base.html.twig' %}
+{# {% extends 'base.html.twig' %}
 
 {% block title %}Chauffeur index{% endblock %}
 
 {% block body %}
-    <h1>Chauffeur index</h1>
+<h1>Chauffeur index</h1>
 
-    <table class="table">
-        <thead>
-            <tr>
-                <th>Id</th>
-                <th>Nom</th>
-                <th>Prenom</th>
-                <th>Contact</th>
-                <th>actions</th>
-            </tr>
-        </thead>
-        <tbody>
+<table class="table">
+    <thead>
+        <tr>
+            <th>Id</th>
+            <th>Nom</th>
+            <th>Prenom</th>
+            <th>Contact</th>
+            <th>actions</th>
+        </tr>
+    </thead>
+    <tbody>
         {% for chauffeur in chauffeurs %}
-            <tr>
-                <td>{{ chauffeur.id }}</td>
-                <td>{{ chauffeur.nom }}</td>
-                <td>{{ chauffeur.prenom }}</td>
-                <td>{{ chauffeur.contact }}</td>
-                <td>
-                    <a href="{{ path('app_chauffeur_show', {'id': chauffeur.id}) }}">show</a>
-                    <a href="{{ path('app_chauffeur_edit', {'id': chauffeur.id}) }}">edit</a>
-                </td>
-            </tr>
+        <tr>
+            <td>{{ chauffeur.id }}</td>
+            <td>{{ chauffeur.nom }}</td>
+            <td>{{ chauffeur.prenom }}</td>
+            <td>{{ chauffeur.contact }}</td>
+            <td>
+                <a href="{{ path('app_chauffeur_show', {'id': chauffeur.id}) }}">show</a>
+                <a href="{{ path('app_chauffeur_edit', {'id': chauffeur.id}) }}">edit</a>
+            </td>
+        </tr>
         {% else %}
-            <tr>
-                <td colspan="5">no records found</td>
-            </tr>
+        <tr>
+            <td colspan="5">no records found</td>
+        </tr>
         {% endfor %}
-        </tbody>
-    </table>
+    </tbody>
+</table>
 
-    <a href="{{ path('app_chauffeur_new') }}">Create new</a>
-{% endblock %}
+<a href="{{ path('app_chauffeur_new') }}">Create new</a>
+{% endblock %} #}
+
+
+
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="utf-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no" />
+    <meta name="description" content="" />
+    <meta name="author" content="" />
+    <title>Chauffeur</title>
+    <link href="https://cdn.jsdelivr.net/npm/simple-datatables@7.1.2/dist/style.min.css" rel="stylesheet" />
+    <link href="{{asset ('css/styles.css')}}" rel="stylesheet" />
+    <script src="https://use.fontawesome.com/releases/v6.3.0/js/all.js" crossorigin="anonymous"></script>
+</head>
+
+<body class="sb-nav-fixed">
+
+    <div id="layoutSidenav">
+
+
+        <div id="layoutSidenav_content">
+            <main>
+                <div class="container-fluid px-4">
+                    <h1 class="mt-4">Liste des Chauffeurs</h1>
+                    <ol class="breadcrumb mb-4">
+                        <li class="breadcrumb-item"><a href="#">Retour</a></li>
+                        <li class="breadcrumb-item active">Chauffeur</li>
+                    </ol>
+                    <a href="{{ path('app_chauffeur_new') }}" class="btn btn-primary">Créer un Chauffeur</a>
+                    <div class="card mb-4">
+                        
+                        <div class="card-body">
+                            <table id="datatablesSimple">
+                                <thead>
+
+                                    <tr>
+                                        <th>Id</th>
+                                        <th>Nom</th>
+                                        <th>Prenom</th>
+                                        <th>Contact</th>
+                                        <th>actions</th>
+                                    </tr>
+
+                                </thead>
+
+                                <tbody>
+                                    {% for chauffeur in chauffeurs %}
+                                    <tr>
+                                        <td>{{ chauffeur.id }}</td>
+                                        <td>{{ chauffeur.nom }}</td>
+                                        <td>{{ chauffeur.prenom }}</td>
+                                        <td>{{ chauffeur.contact }}</td>
+                                        <td>
+                                            <a href="{{ path('app_chauffeur_show', {'id': chauffeur.id}) }}" class="btn btn-success">Voir</a>
+                                            <a href="{{ path('app_chauffeur_edit', {'id': chauffeur.id}) }}" class="btn btn-success">Modifier</a>
+                                        </td>
+                                    </tr>
+                                    {% else %}
+                                    <tr>
+                                        <td colspan="5">Aucun chauffeur trouvé</td>
+                                    </tr>
+                                    {% endfor %}
+                                </tbody>
+                            </table>
+                        </div>
+                    </div>
+                </div>
+            </main>
+          
+        </div>
+    </div>
+    <!-- <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.2.3/dist/js/bootstrap.bundle.min.js" crossorigin="anonymous"></script> -->
+    <!-- <script src="js/scripts.js"></script> -->
+    <script src="https://cdn.jsdelivr.net/npm/simple-datatables@7.1.2/dist/umd/simple-datatables.min.js"
+        crossorigin="anonymous"></script>
+    <script src="{{ asset ('js/datatables-simple-demo.js') }}"></script>
+</body>
+
+</html>
