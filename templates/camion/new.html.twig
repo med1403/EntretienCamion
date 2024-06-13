@@ -1,0 +1,74 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}Nouveau Camion{% endblock %}
+
+{% block body %}
+    <h1>Créer un nouveau Camion</h1>
+
+    {{ form_start(form, {'attr': {'class': 'needs-validation', 'novalidate': ''}}) }}
+        <div class="form-group">
+            {{ form_label(form.remorque) }}
+            {{ form_widget(form.remorque, {'attr': {'class': 'form-control'}}) }}
+            <div class="invalid-feedback">
+                {{ form_errors(form.remorque) }}
+            </div>
+        </div>
+        <div class="form-group">
+            {{ form_label(form.dateIntegration) }}
+            {{ form_widget(form.dateIntegration, {'attr': {'class': 'form-control'}}) }}
+            <div class="invalid-feedback">
+                {{ form_errors(form.dateIntegration) }}
+            </div>
+        </div>
+        <div class="form-group">
+            {{ form_label(form.location) }}
+            {{ form_widget(form.location, {'attr': {'class': 'form-control'}}) }}
+            <div class="invalid-feedback">
+                {{ form_errors(form.location) }}
+            </div>
+        </div>
+        <div class="form-group">
+            {{ form_label(form.statut) }}
+            {{ form_widget(form.statut, {'attr': {'class': 'form-control'}}) }}
+            <div class="invalid-feedback">
+                {{ form_errors(form.statut) }}
+            </div>
+        </div>
+        <div class="form-group">
+            {{ form_label(form.observation) }}
+            {{ form_widget(form.observation, {'attr': {'class': 'form-control'}}) }}
+            <div class="invalid-feedback">
+                {{ form_errors(form.observation) }}
+            </div>
+        </div>
+        <div class="form-group">
+            {{ form_label(form.kmActuel) }}
+            {{ form_widget(form.kmActuel, {'attr': {'class': 'form-control'}}) }}
+            <div class="invalid-feedback">
+                {{ form_errors(form.kmActuel) }}
+            </div>
+        </div>
+        <div class="form-group">
+            {{ form_label(form.categorie) }}
+            {{ form_widget(form.categorie, {'attr': {'class': 'form-control'}}) }}
+            <div class="invalid-feedback">
+                {{ form_errors(form.categorie) }}
+            </div>
+        </div>
+        <div class="form-group">
+            {{ form_label(form.typeCamion) }}
+            {{ form_widget(form.typeCamion, {'attr': {'class': 'form-control'}}) }}
+            <div class="invalid-feedback">
+                {{ form_errors(form.typeCamion) }}
+            </div>
+        </div>
+        <div class="form-group">
+            {{ form_label(form.tracteur) }}
+            {{ form_widget(form.tracteur, {'attr': {'class': 'form-control'}}) }}
+            <div class="invalid-feedback">
+                {{ form_errors(form.tracteur) }}
+            </div>
+        </div>
+        <button class="btn btn-primary" type="submit">Enregistrer</button>
+    {{ form_end(form) }}
+{% endblock %}

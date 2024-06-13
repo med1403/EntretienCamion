@@ -1,0 +1,30 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}TypeCamion{% endblock %}
+
+{% block body %}
+    <h1>TypeCamion</h1>
+
+    <table class="table">
+        <tbody>
+            <tr>
+                <th>Id</th>
+                <td>{{ type_camion.id }}</td>
+            </tr>
+            <tr>
+                <th>Nom</th>
+                <td>{{ type_camion.nom }}</td>
+            </tr>
+            <tr>
+                <th>KmVidenge</th>
+                <td>{{ type_camion.kmVidenge }}</td>
+            </tr>
+        </tbody>
+    </table>
+
+    <a href="{{ path('app_type_camion_index') }}">back to list</a>
+
+    <a href="{{ path('app_type_camion_edit', {'id': type_camion.id}) }}">edit</a>
+
+    {{ include('type_camion/_delete_form.html.twig') }}
+{% endblock %}
