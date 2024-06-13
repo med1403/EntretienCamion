@@ -1,0 +1,13 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}Add Mecanicien{% endblock %}
+
+{% block body %}
+    <div class="container mt-4">
+        <h1>Ajouter un Mecanicien</h1>
+
+        {{ include('mecanicien/_form.html.twig', {'button_label': 'Create'}) }}
+
+        <a href="{{ path('app_mecanicien_index') }}" class="btn btn-secondary mt-3">Retour</a>
+    </div>
+{% endblock %}
