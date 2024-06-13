@@ -4,6 +4,14 @@
 
 {% block body %}
     <h1>Créer un nouveau Camion</h1>
+    {% for label, messages in app.flashes %}
+    {% for message in messages %}
+        <div class="alert alert-{{ label }}">
+            {{ message }}
+        </div>
+    {% endfor %}
+{% endfor %}
+
 
     {{ form_start(form, {'attr': {'class': 'needs-validation', 'novalidate': ''}}) }}
         <div class="form-group">

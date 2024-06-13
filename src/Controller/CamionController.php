@@ -30,6 +30,11 @@ class CamionController extends AbstractController
         $form->handleRequest($request);
 
         if ($form->isSubmitted() && $form->isValid()) {
+            // Vérifier si les champs obligatoires sont vides
+            if (!$camion->getTypeCamion() || !$camion->getTracteur() || !$camion->getCategorie()) {
+                $this->addFlash('warning', 'Veuillez remplir tous les champs obligatoires.');
+                return $this->redirectToRoute('app_camion_new');
+            }
             $entityManager->persist($camion);
             $entityManager->flush();
 
