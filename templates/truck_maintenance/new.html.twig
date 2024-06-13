@@ -1,0 +1,63 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}Créer un nouveau Contrôleur{% endblock %}
+
+{% block stylesheets %}
+    {{ parent() }}
+    <style>
+        form {
+            margin-top: 20px;
+        }
+    </style>
+{% endblock %}
+
+{% block body %}
+    <h1>Créer un nouveau Contrôleur</h1>
+
+    {{ form_start(form, {'attr': {'class': 'form-horizontal'}}) }}
+        <div class="form-group">
+            {{ form_label(form.nom, 'Nom', {'label_attr': {'class': 'col-sm-2 col-form-label'}}) }}
+            <div class="col-sm-10">
+                {{ form_widget(form.nom, {'attr': {'class': 'form-control'}}) }}
+            </div>
+        </div>
+        <div class="form-group">
+            {{ form_label(form.adresse, 'Adresse', {'label_attr': {'class': 'col-sm-2 col-form-label'}}) }}
+            <div class="col-sm-10">
+                {{ form_widget(form.adresse, {'attr': {'class': 'form-control'}}) }}
+            </div>
+        </div>
+        <div class="form-group">
+            {{ form_label(form.numeroDeTel, 'Numéro de Tel', {'label_attr': {'class': 'col-sm-2 col-form-label'}}) }}
+            <div class="col-sm-10">
+                {{ form_widget(form.numeroDeTel, {'attr': {'class': 'form-control'}}) }}
+            </div>
+        </div>
+        <div class="form-group">
+            {{ form_label(form.adresseEmail, 'Adresse Email', {'label_attr': {'class': 'col-sm-2 col-form-label'}}) }}
+            <div class="col-sm-10">
+                {{ form_widget(form.adresseEmail, {'attr': {'class': 'form-control'}}) }}
+            </div>
+        </div>
+        <div class="form-group">
+            {{ form_label(form.numeroDeBadge, 'Numéro de Badge', {'label_attr': {'class': 'col-sm-2 col-form-label'}}) }}
+            <div class="col-sm-10">
+                {{ form_widget(form.numeroDeBadge, {'attr': {'class': 'form-control'}}) }}
+            </div>
+        </div>
+        <div class="form-group">
+            {{ form_label(form.dateDeNaissance, 'Date de Naissance', {'label_attr': {'class': 'col-sm-2 col-form-label'}}) }}
+            <div class="col-sm-10">
+                {{ form_widget(form.dateDeNaissance, {'attr': {'class': 'form-control'}}) }}
+            </div>
+        </div>
+        <div class="form-group">
+            {{ form_label(form.categoriesPermis, 'Catégories de Permis de Conduire', {'label_attr': {'class': 'col-sm-2 col-form-label'}}) }}
+            <div class="col-sm-10">
+                {{ form_widget(form.categoriesPermis, {'attr': {'class': 'form-control'}}) }}
+            </div>
+        </div>
+        <button class="btn btn-success">Créer</button>
+    {{ form_end(form) }}
+
+{% endblock %}
