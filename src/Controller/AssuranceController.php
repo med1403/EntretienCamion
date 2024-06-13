@@ -9,16 +9,25 @@ use Doctrine\ORM\EntityManagerInterface;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\Response;
-use Symfony\Component\Routing\Attribute\Route;
+use Symfony\Component\Routing\Annotation\Route;
 
 #[Route('/assurance')]
 class AssuranceController extends AbstractController
 {
     #[Route('/', name: 'app_assurance_index', methods: ['GET'])]
-    public function index(AssuranceRepository $assuranceRepository): Response
+    public function index(AssuranceRepository $assuranceRepository, Request $request): Response
     {
+        $search = $request->query->get('search');
+        $assurances = $search 
+            ? $assuranceRepository->createQueryBuilder('a')
+                ->where('a.compagnie LIKE :search OR a.numPolice LIKE :search')
+                ->setParameter('search', '%'.$search.'%')
+                ->getQuery()
+                ->getResult()
+            : $assuranceRepository->findAll();
+
         return $this->render('assurance/index.html.twig', [
-            'assurances' => $assuranceRepository->findAll(),
+            'assurances' => $assurances,
         ]);
     }
 
@@ -71,7 +80,7 @@ class AssuranceController extends AbstractController
     #[Route('/{id}', name: 'app_assurance_delete', methods: ['POST'])]
     public function delete(Request $request, Assurance $assurance, EntityManagerInterface $entityManager): Response
     {
-        if ($this->isCsrfTokenValid('delete'.$assurance->getId(), $request->getPayload()->get('_token'))) {
+        if ($this->isCsrfTokenValid('delete'.$assurance->getId(), $request->request->get('_token'))) {
             $entityManager->remove($assurance);
             $entityManager->flush();
         }
