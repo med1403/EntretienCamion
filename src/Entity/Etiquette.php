@@ -12,7 +12,7 @@ class Etiquette
 {
     #[ORM\Id]
     #[ORM\GeneratedValue]
-    #[ORM\Column]
+    #[ORM\Column(type: 'integer')]
     private ?int $id = null;
 
     /**
@@ -21,10 +21,10 @@ class Etiquette
     #[ORM\ManyToMany(targetEntity: Camion::class, inversedBy: 'etiquettes')]
     private Collection $camion;
 
-    #[ORM\Column(length: 20)]
+    #[ORM\Column(type: 'string', length: 255)]
     private ?string $etat = null;
 
-    #[ORM\Column]
+    #[ORM\Column(type: 'boolean')]
     private ?bool $disponibilite = null;
 
     public function __construct()
@@ -40,7 +40,6 @@ class Etiquette
     public function setId(int $id): static
     {
         $this->id = $id;
-
         return $this;
     }
 
@@ -57,14 +56,12 @@ class Etiquette
         if (!$this->camion->contains($camion)) {
             $this->camion->add($camion);
         }
-
         return $this;
     }
 
     public function removeCamion(Camion $camion): static
     {
         $this->camion->removeElement($camion);
-
         return $this;
     }
 
@@ -76,7 +73,6 @@ class Etiquette
     public function setEtat(string $etat): static
     {
         $this->etat = $etat;
-
         return $this;
     }
 
@@ -88,7 +84,6 @@ class Etiquette
     public function setDisponibilite(bool $disponibilite): static
     {
         $this->disponibilite = $disponibilite;
-
         return $this;
     }
 }

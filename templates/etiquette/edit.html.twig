@@ -1,0 +1,26 @@
+{# templates/etiquette/edit.html.twig #}
+
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="UTF-8">
+    <title>Modifier une étiquette</title>
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css">
+</head>
+<body>
+    <div class="container mt-5">
+        <h1 class="mb-4">Modifier une étiquette</h1>
+        {{ form_start(form) }}
+            <div class="form-group">
+                {{ form_label(form.etat) }}
+                {{ form_widget(form.etat, {'attr': {'class': 'form-control'}}) }}
+            </div>
+            <div class="form-group">
+                {{ form_label(form.disponibilite) }}
+                {{ form_widget(form.disponibilite, {'attr': {'class': 'form-control'}}) }}
+            </div>
+            <button type="submit" class="btn btn-primary">Enregistrer</button>
+        {{ form_end(form) }}
+    </div>
+</body>
+</html>

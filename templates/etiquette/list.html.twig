@@ -1,0 +1,47 @@
+{# templates/etiquette/list.html.twig #}
+
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="UTF-8">
+    <title>Liste des étiquettes</title>
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css">
+</head>
+<body>
+    <div class="container mt-5">
+        <h1 class="mb-4">Liste des étiquettes</h1>
+        <form method="get" action="{{ path('etiquette_search') }}" class="mb-4">
+            <div class="form-row">
+                <div class="col">
+                    <input type="text" name="etat" class="form-control" placeholder="Rechercher une étiquette par État">
+                </div>
+                <div class="col">
+                    <button type="submit" class="btn btn-primary">Rechercher</button>
+                </div>
+            </div>
+        </form>
+        <table class="table table-bordered">
+            <thead>
+                <tr>
+                    <th>ID</th>
+                    <th>État</th>
+                    <th>Disponibilité</th>
+                    <th>Actions</th>
+                </tr>
+            </thead>
+            <tbody>
+                {% for etiquette in etiquettes %}
+                    <tr>
+                        <td>{{ etiquette.id }}</td>
+                        <td>{{ etiquette.etat }}</td>
+                        <td>{{ etiquette.disponibilite ? 'Disponible' : 'Indisponible' }}</td>
+                        <td>
+                            <a href="{{ path('etiquette_edit', {'id': etiquette.id}) }}" class="btn btn-warning btn-sm">Modifier</a>
+                        </td>
+                    </tr>
+                {% endfor %}
+            </tbody>
+        </table>
+    </div>
+</body>
+</html>

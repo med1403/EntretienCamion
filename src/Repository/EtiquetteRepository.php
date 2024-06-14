@@ -11,33 +11,57 @@ use Doctrine\Persistence\ManagerRegistry;
  */
 class EtiquetteRepository extends ServiceEntityRepository
 {
-    public function __construct(ManagerRegistry $registry)
+    private $entityManager;
+
+    public function __construct(ManagerRegistry $registry, \Doctrine\ORM\EntityManagerInterface $entityManager)
     {
         parent::__construct($registry, Etiquette::class);
+        $this->entityManager = $entityManager;
     }
 
-    //    /**
-    //     * @return Etiquette[] Returns an array of Etiquette objects
-    //     */
-    //    public function findByExampleField($value): array
-    //    {
-    //        return $this->createQueryBuilder('e')
-    //            ->andWhere('e.exampleField = :val')
-    //            ->setParameter('val', $value)
-    //            ->orderBy('e.id', 'ASC')
-    //            ->setMaxResults(10)
-    //            ->getQuery()
-    //            ->getResult()
-    //        ;
-    //    }
+    /**
+     * Récupère toutes les étiquettes.
+     *
+     * @return Etiquette[] Liste des étiquettes
+     */
+    public function findAllEtiquettes(): array
+    {
+        return $this->findAll();
+    }
 
-    //    public function findOneBySomeField($value): ?Etiquette
-    //    {
-    //        return $this->createQueryBuilder('e')
-    //            ->andWhere('e.exampleField = :val')
-    //            ->setParameter('val', $value)
-    //            ->getQuery()
-    //            ->getOneOrNullResult()
-    //        ;
-    //    }
+    /**
+     * Recherche une étiquette par son ID.
+     *
+     * @param int $id L'ID de l'étiquette à rechercher
+     * @return Etiquette|null L'étiquette correspondante ou null si non trouvée
+     */
+    public function findEtiquetteById(int $id): ?Etiquette
+    {
+        return $this->find($id);
+    }
+
+    /**
+     * Modifie une étiquette existante.
+     *
+     * @param Etiquette $etiquette L'étiquette à modifier
+     * @return Etiquette L'étiquette modifiée
+     */
+    public function updateEtiquette(Etiquette $etiquette): Etiquette
+    {
+        $this->entityManager->persist($etiquette);
+        $this->entityManager->flush();
+
+        return $etiquette;
+    }
+
+    /**
+     * Recherche les étiquettes par un critère donné.
+     *
+     * @param array $criteria Critères de recherche
+     * @return Etiquette[] Liste des étiquettes correspondantes
+     */
+    public function searchEtiquettes(array $criteria): array
+    {
+        return $this->findBy($criteria);
+    }
 }
