@@ -1,0 +1,63 @@
+{% extends 'accueil/index.html.twig' %}
+
+{% block title %}Liste des Administrateurs{% endblock %}
+{% block PageTitle %}Liste des Administrateurs{% endblock %}
+
+{% block body %}
+    <div class="container mt-0">
+
+        {% for message in app.flashes('success') %}
+            <div class="alert alert-success mt-3">
+                {{ message }}
+            </div>
+        {% endfor %}
+        {% for message in app.flashes('error') %}
+            <div class="alert alert-danger mt-3">
+                {{ message }}
+            </div>
+        {% endfor %}
+
+        <div class="table-responsive mt-2">
+            <table class="table table-striped table-hover">
+                <thead>
+                    <tr>
+                        <th scope="col">Photo</th>
+                        <th scope="col">Username</th>
+                        <th scope="col">Nom</th>
+                        <th scope="col">Prénom</th>
+                        <th scope="col">Email</th>
+                        <th scope="col">Téléphone</th>
+                        <th scope="col">Type d'Admin</th>
+                        <th scope="col">Actions</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    {% for user in users %}
+                        <tr>
+                            <td>
+                                {% if user.photo %}
+                                    <img src="{{ asset('uploads/photos/' ~ user.photo) }}" alt="{{ user.username }}" class="rounded-circle" style="width: 50px; height: 50px;">
+                                {% else %}
+                                    <i class="fas fa-user-circle fa-3x"></i>
+                                {% endif %}
+                            </td>
+                            <td>{{ user.username }}</td>
+                            <td>{{ user.nom }}</td>
+                            <td>{{ user.prenom }}</td>
+                            <td>{{ user.email }}</td>
+                            <td>{{ user.telephone }}</td>
+                            <td>{{ user.typeAdmin }}</td>
+                            <td>
+                                <form action="{{ path('admin_delete', {'id': user.id}) }}" method="post" onsubmit="return confirm('Êtes-vous sûr de vouloir supprimer cet admin ?');">
+                                    <input type="hidden" name="_method" value="DELETE">
+                                    <input type="hidden" name="_token" value="{{ csrf_token('delete' ~ user.id) }}">
+                                    <button type="submit" class="btn btn-outline-danger btn-sm"><i class="fas fa-trash"></i></button>
+                                </form>
+                            </td>
+                        </tr>
+                    {% endfor %}
+                </tbody>
+            </table>
+        </div>
+    </div>
+{% endblock %}
