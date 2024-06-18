@@ -1,0 +1,74 @@
+{% extends 'inspection/base.html.twig' %}
+
+{% block title %}Modifier Inspection{% endblock %}
+
+{% block stylesheets %}
+    <style>
+        .card {
+            border-radius: 0;
+        }
+        .delete {
+            border: 1px solid black;
+            width: 150px;
+            border-radius: 5px;
+            background-color: red;
+            color: white;
+            height: 40px;
+            text-align: center;
+        }
+    </style>
+{% endblock %}
+
+{% block javascripts %}
+    <script>
+        document.addEventListener('DOMContentLoaded', function () {
+            flatpickr(".js-datepicker", {
+                enableTime: true,
+                dateFormat: "Y-m-d H:i",
+            });
+        });
+    </script>
+{% endblock %}
+
+{% block body %}
+    <div class="container mt-5">
+        <div class="card">
+            <div class="card-header">
+                <h1 class="mb-0"><i class="fas fa-edit"></i> Modifier Inspection</h1>
+            </div>
+            <div class="card-body">
+                {{ form_start(form) }}
+                <div class="form-group">
+                    {{ form_label(form.dateInspection) }}
+                    {{ form_widget(form.dateInspection, {'attr': {'class': 'form-control js-datepicker', 'placeholder': 'Enter la date de l\'inspection'}}) }}
+                </div>
+                <div class="form-group">
+                    {{ form_label(form.resultat) }}
+                    {{ form_widget(form.resultat, {'attr': {'class': 'form-control', 'placeholder': 'Enter le résultat'}}) }}
+                </div>
+                <div class="form-group">
+                    {{ form_label(form.commentaire) }}
+                    {{ form_widget(form.commentaire, {'attr': {'class': 'form-control', 'placeholder': 'Enter le commentaire'}}) }}
+                </div>
+                <div class="form-group">
+                    {{ form_label(form.inspecteur) }}
+                    {{ form_widget(form.inspecteur, {'attr': {'class': 'form-control', 'placeholder': 'Select the inspector'}}) }}
+                </div>
+                <div class="form-group">
+                    {{ form_label(form.camion) }}
+                    {{ form_widget(form.camion, {'attr': {'class': 'form-control', 'placeholder': 'Select the truck'}}) }}
+                </div>
+                <button class="btn btn-primary"><i class="fas fa-save"></i> Enregistrer</button>
+                {{ form_end(form) }}
+                <div class="mt-3">
+                    <a href="{{ path('app_inspection_index') }}" class="btn btn-secondary">
+                        <i class="fas fa-arrow-left"></i> Retour à la liste
+                    </a>
+                    <div class="delete btn btn-danger">
+                        {{ include('inspection/_delete_form.html.twig', { 'class': 'd-inline' }) }}
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+{% endblock %}
