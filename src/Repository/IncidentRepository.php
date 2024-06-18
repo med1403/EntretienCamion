@@ -2,6 +2,7 @@
 
 namespace App\Repository;
 
+use App\Entity\Incidence;
 use App\Entity\Incident;
 use Doctrine\Bundle\DoctrineBundle\Repository\ServiceEntityRepository;
 use Doctrine\Persistence\ManagerRegistry;
@@ -18,11 +19,11 @@ class IncidentRepository extends ServiceEntityRepository
 {
     public function __construct(ManagerRegistry $registry)
     {
-        parent::__construct($registry, Incident::class);
+        parent::__construct($registry, Incidence::class);
     }
 
     /**
-     * @return Incident[] Returns an array of Incident objects
+     * @return Incidence[] Returns an array of Incident objects
      */
     public function findByCriteria($criteria)
     {
