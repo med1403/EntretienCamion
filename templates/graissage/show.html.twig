@@ -1,0 +1,64 @@
+{% extends 'graissage/base.html.twig' %}
+
+{% block title %}Graissage{% endblock %}
+
+{% block stylesheets %}
+    <style>
+        .table th, .table td {
+            vertical-align: middle;
+        }
+    </style>
+{% endblock %}
+
+{% block body %}
+    <div class="container mt-5">
+        <div class="card">
+            <div class="card-header">
+                <h1 class="mb-0"><i class="fas fa-info-circle"></i> Détails Graissage</h1>
+            </div>
+            <div class="card-body">
+                <table class="table table-bordered">
+                    <tbody>
+                        <tr>
+                            <th>Id</th>
+                            <td>{{ graissage.id }}</td>
+                        </tr>
+                        <tr>
+                            <th>Date de Graissage</th>
+                            <td>{{ graissage.dateGraissage ? graissage.dateGraissage|date('Y-m-d') : '' }}</td>
+                        </tr>
+                        <tr>
+                            <th>Kilomètres de Graissage</th>
+                            <td>{{ graissage.kmGraissage }}</td>
+                        </tr>
+                        <tr>
+                            <th>Écart Type</th>
+                            <td>{{ graissage.ecartType }}</td>
+                        </tr>
+                        <tr>
+                            <th>Nombre de Kilomètres Restants</th>
+                            <td>{{ graissage.nbKmRestant }}</td>
+                        </tr>
+                        <tr>
+                            <th>Camions</th>
+                            <td>
+                                {% for camion in graissage.camion %}
+                                    {{ camion.categorie.nom }}{% if not loop.last %}, {% endif %}
+                                {% endfor %}
+                            </td>
+                        </tr>
+                    </tbody>
+                </table>
+                <div class="mt-3">
+                    <a href="{{ path('app_graissage_index') }}" class="btn btn-secondary">
+                        <i class="fas fa-arrow-left"></i> Retour à la liste
+                    </a>
+                    <a href="{{ path('app_graissage_edit', {'id': graissage.id}) }}" class="btn btn-primary">
+                        <i class="fas fa-edit"></i> Modifier
+                    </a>
+                    {{ include('graissage/_delete_form.html.twig', { 'class': 'd-inline' }) }}
+                </div>
+            </div>
+        </div>
+    </div>
+{% endblock %}
