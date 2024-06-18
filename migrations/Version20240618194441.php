@@ -10,7 +10,7 @@ use Doctrine\Migrations\AbstractMigration;
 /**
  * Auto-generated Migration: Please modify to your needs!
  */
-final class Version20240613002847 extends AbstractMigration
+final class Version20240618194441 extends AbstractMigration
 {
     public function getDescription(): string
     {
@@ -27,7 +27,7 @@ final class Version20240613002847 extends AbstractMigration
         $this->addSql('CREATE TABLE categorie (id INT AUTO_INCREMENT NOT NULL, nom VARCHAR(50) NOT NULL, PRIMARY KEY(id)) DEFAULT CHARACTER SET utf8mb4 COLLATE `utf8mb4_unicode_ci` ENGINE = InnoDB');
         $this->addSql('CREATE TABLE chauffeur (id INT AUTO_INCREMENT NOT NULL, nom VARCHAR(50) NOT NULL, prenom VARCHAR(50) NOT NULL, contact VARCHAR(50) NOT NULL, PRIMARY KEY(id)) DEFAULT CHARACTER SET utf8mb4 COLLATE `utf8mb4_unicode_ci` ENGINE = InnoDB');
         $this->addSql('CREATE TABLE checklist (id INT AUTO_INCREMENT NOT NULL, camion_id INT DEFAULT NULL, date_checklist DATE NOT NULL, INDEX IDX_5C696D2F3A706D3 (camion_id), PRIMARY KEY(id)) DEFAULT CHARACTER SET utf8mb4 COLLATE `utf8mb4_unicode_ci` ENGINE = InnoDB');
-        $this->addSql('CREATE TABLE etiquette (id INT AUTO_INCREMENT NOT NULL, etat VARCHAR(20) NOT NULL, disponibilite TINYINT(1) NOT NULL, PRIMARY KEY(id)) DEFAULT CHARACTER SET utf8mb4 COLLATE `utf8mb4_unicode_ci` ENGINE = InnoDB');
+        $this->addSql('CREATE TABLE etiquette (id INT AUTO_INCREMENT NOT NULL, etat VARCHAR(255) NOT NULL, disponibilite TINYINT(1) NOT NULL, PRIMARY KEY(id)) DEFAULT CHARACTER SET utf8mb4 COLLATE `utf8mb4_unicode_ci` ENGINE = InnoDB');
         $this->addSql('CREATE TABLE etiquette_camion (etiquette_id INT NOT NULL, camion_id INT NOT NULL, INDEX IDX_86CFA087BD2EA57 (etiquette_id), INDEX IDX_86CFA083A706D3 (camion_id), PRIMARY KEY(etiquette_id, camion_id)) DEFAULT CHARACTER SET utf8mb4 COLLATE `utf8mb4_unicode_ci` ENGINE = InnoDB');
         $this->addSql('CREATE TABLE grade_videnge (id INT AUTO_INCREMENT NOT NULL, nom VARCHAR(50) NOT NULL, PRIMARY KEY(id)) DEFAULT CHARACTER SET utf8mb4 COLLATE `utf8mb4_unicode_ci` ENGINE = InnoDB');
         $this->addSql('CREATE TABLE graissage (id INT AUTO_INCREMENT NOT NULL, date_graissage DATE NOT NULL, km_graissage DOUBLE PRECISION NOT NULL, ecart_type DOUBLE PRECISION NOT NULL, nb_km_restant DOUBLE PRECISION NOT NULL, PRIMARY KEY(id)) DEFAULT CHARACTER SET utf8mb4 COLLATE `utf8mb4_unicode_ci` ENGINE = InnoDB');
@@ -37,11 +37,11 @@ final class Version20240613002847 extends AbstractMigration
         $this->addSql('CREATE TABLE historique_camion (id INT AUTO_INCREMENT NOT NULL, date_suppression DATE NOT NULL, PRIMARY KEY(id)) DEFAULT CHARACTER SET utf8mb4 COLLATE `utf8mb4_unicode_ci` ENGINE = InnoDB');
         $this->addSql('CREATE TABLE historique_camion_camion (historique_camion_id INT NOT NULL, camion_id INT NOT NULL, INDEX IDX_1226BE9550D44D9B (historique_camion_id), INDEX IDX_1226BE953A706D3 (camion_id), PRIMARY KEY(historique_camion_id, camion_id)) DEFAULT CHARACTER SET utf8mb4 COLLATE `utf8mb4_unicode_ci` ENGINE = InnoDB');
         $this->addSql('CREATE TABLE incidence (id INT AUTO_INCREMENT NOT NULL, type VARCHAR(30) NOT NULL, description VARCHAR(255) NOT NULL, PRIMARY KEY(id)) DEFAULT CHARACTER SET utf8mb4 COLLATE `utf8mb4_unicode_ci` ENGINE = InnoDB');
-        $this->addSql('CREATE TABLE incidence_camion (incidence_id INT NOT NULL, camion_id INT NOT NULL, INDEX IDX_DF80FBBFF22710E3 (incidence_id), INDEX IDX_DF80FBBF3A706D3 (camion_id), PRIMARY KEY(incidence_id, camion_id)) DEFAULT CHARACTER SET utf8mb4 COLLATE `utf8mb4_unicode_ci` ENGINE = InnoDB');
         $this->addSql('CREATE TABLE inspecteur (id INT AUTO_INCREMENT NOT NULL, nom VARCHAR(50) NOT NULL, prenom VARCHAR(50) NOT NULL, contact VARCHAR(50) NOT NULL, PRIMARY KEY(id)) DEFAULT CHARACTER SET utf8mb4 COLLATE `utf8mb4_unicode_ci` ENGINE = InnoDB');
         $this->addSql('CREATE TABLE inspection (id INT AUTO_INCREMENT NOT NULL, inspecteur_id INT DEFAULT NULL, date_inspection DATE NOT NULL, resultat TINYINT(1) NOT NULL, commentaire LONGTEXT NOT NULL, INDEX IDX_F9F13485B7728AA0 (inspecteur_id), PRIMARY KEY(id)) DEFAULT CHARACTER SET utf8mb4 COLLATE `utf8mb4_unicode_ci` ENGINE = InnoDB');
         $this->addSql('CREATE TABLE list_piece (id INT AUTO_INCREMENT NOT NULL, quantite INT NOT NULL, prix_total DOUBLE PRECISION NOT NULL, PRIMARY KEY(id)) DEFAULT CHARACTER SET utf8mb4 COLLATE `utf8mb4_unicode_ci` ENGINE = InnoDB');
         $this->addSql('CREATE TABLE list_piece_piece (list_piece_id INT NOT NULL, piece_id INT NOT NULL, INDEX IDX_D9C639C3BA62FCC8 (list_piece_id), INDEX IDX_D9C639C3C40FCFA8 (piece_id), PRIMARY KEY(list_piece_id, piece_id)) DEFAULT CHARACTER SET utf8mb4 COLLATE `utf8mb4_unicode_ci` ENGINE = InnoDB');
+        $this->addSql('CREATE TABLE mecanicien (id INT AUTO_INCREMENT NOT NULL, nom VARCHAR(50) NOT NULL, prenom VARCHAR(100) NOT NULL, contact VARCHAR(255) NOT NULL, adresse VARCHAR(50) NOT NULL, PRIMARY KEY(id)) DEFAULT CHARACTER SET utf8mb4 COLLATE `utf8mb4_unicode_ci` ENGINE = InnoDB');
         $this->addSql('CREATE TABLE piece (id INT AUTO_INCREMENT NOT NULL, nom VARCHAR(50) NOT NULL, marque VARCHAR(50) NOT NULL, nb_reference VARCHAR(50) NOT NULL, prix_unitaire DOUBLE PRECISION NOT NULL, PRIMARY KEY(id)) DEFAULT CHARACTER SET utf8mb4 COLLATE `utf8mb4_unicode_ci` ENGINE = InnoDB');
         $this->addSql('CREATE TABLE recu (id INT AUTO_INCREMENT NOT NULL, image_recu VARCHAR(50) NOT NULL, PRIMARY KEY(id)) DEFAULT CHARACTER SET utf8mb4 COLLATE `utf8mb4_unicode_ci` ENGINE = InnoDB');
         $this->addSql('CREATE TABLE recu_vendeur (recu_id INT NOT NULL, vendeur_id INT NOT NULL, INDEX IDX_795D7D15A5D1C184 (recu_id), INDEX IDX_795D7D15858C065E (vendeur_id), PRIMARY KEY(recu_id, vendeur_id)) DEFAULT CHARACTER SET utf8mb4 COLLATE `utf8mb4_unicode_ci` ENGINE = InnoDB');
@@ -71,8 +71,6 @@ final class Version20240613002847 extends AbstractMigration
         $this->addSql('ALTER TABLE historique_chauffeur ADD CONSTRAINT FK_FD43CF085C0B3BE FOREIGN KEY (chauffeur_id) REFERENCES chauffeur (id) ON DELETE CASCADE');
         $this->addSql('ALTER TABLE historique_camion_camion ADD CONSTRAINT FK_1226BE9550D44D9B FOREIGN KEY (historique_camion_id) REFERENCES historique_camion (id) ON DELETE CASCADE');
         $this->addSql('ALTER TABLE historique_camion_camion ADD CONSTRAINT FK_1226BE953A706D3 FOREIGN KEY (camion_id) REFERENCES camion (id) ON DELETE CASCADE');
-        $this->addSql('ALTER TABLE incidence_camion ADD CONSTRAINT FK_DF80FBBFF22710E3 FOREIGN KEY (incidence_id) REFERENCES incidence (id) ON DELETE CASCADE');
-        $this->addSql('ALTER TABLE incidence_camion ADD CONSTRAINT FK_DF80FBBF3A706D3 FOREIGN KEY (camion_id) REFERENCES camion (id) ON DELETE CASCADE');
         $this->addSql('ALTER TABLE inspection ADD CONSTRAINT FK_F9F13485B7728AA0 FOREIGN KEY (inspecteur_id) REFERENCES inspecteur (id)');
         $this->addSql('ALTER TABLE list_piece_piece ADD CONSTRAINT FK_D9C639C3BA62FCC8 FOREIGN KEY (list_piece_id) REFERENCES list_piece (id) ON DELETE CASCADE');
         $this->addSql('ALTER TABLE list_piece_piece ADD CONSTRAINT FK_D9C639C3C40FCFA8 FOREIGN KEY (piece_id) REFERENCES piece (id) ON DELETE CASCADE');
@@ -108,8 +106,6 @@ final class Version20240613002847 extends AbstractMigration
         $this->addSql('ALTER TABLE historique_chauffeur DROP FOREIGN KEY FK_FD43CF085C0B3BE');
         $this->addSql('ALTER TABLE historique_camion_camion DROP FOREIGN KEY FK_1226BE9550D44D9B');
         $this->addSql('ALTER TABLE historique_camion_camion DROP FOREIGN KEY FK_1226BE953A706D3');
-        $this->addSql('ALTER TABLE incidence_camion DROP FOREIGN KEY FK_DF80FBBFF22710E3');
-        $this->addSql('ALTER TABLE incidence_camion DROP FOREIGN KEY FK_DF80FBBF3A706D3');
         $this->addSql('ALTER TABLE inspection DROP FOREIGN KEY FK_F9F13485B7728AA0');
         $this->addSql('ALTER TABLE list_piece_piece DROP FOREIGN KEY FK_D9C639C3BA62FCC8');
         $this->addSql('ALTER TABLE list_piece_piece DROP FOREIGN KEY FK_D9C639C3C40FCFA8');
@@ -142,11 +138,11 @@ final class Version20240613002847 extends AbstractMigration
         $this->addSql('DROP TABLE historique_camion');
         $this->addSql('DROP TABLE historique_camion_camion');
         $this->addSql('DROP TABLE incidence');
-        $this->addSql('DROP TABLE incidence_camion');
         $this->addSql('DROP TABLE inspecteur');
         $this->addSql('DROP TABLE inspection');
         $this->addSql('DROP TABLE list_piece');
         $this->addSql('DROP TABLE list_piece_piece');
+        $this->addSql('DROP TABLE mecanicien');
         $this->addSql('DROP TABLE piece');
         $this->addSql('DROP TABLE recu');
         $this->addSql('DROP TABLE recu_vendeur');
