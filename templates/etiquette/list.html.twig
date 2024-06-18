@@ -1,11 +1,19 @@
-{# templates/etiquette/list.html.twig #}
-
 <!DOCTYPE html>
 <html>
 <head>
     <meta charset="UTF-8">
     <title>Liste des étiquettes</title>
-    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css">
+    <link rel="stylesheet" href="{{ asset('css/bootstrap-4/css/bootstrap.min.css') }}">
+    <style>
+        .img {
+            width: 50px;
+            height: auto;
+            transition: transform 0.2s ease-in-out;
+        }
+        .img:hover {
+            transform: scale(1.1);
+        }
+    </style>
 </head>
 <body>
     <div class="container mt-5">
@@ -18,12 +26,19 @@
                 <div class="col">
                     <button type="submit" class="btn btn-primary">Rechercher</button>
                 </div>
+
+                {# Cette div va m'afficher l'image d'ajout d'étiquette Fodé Kerfala Camara 17/06/2024#}
+                <div class="col text-right">
+                    <a href="{{ path('ajouter') }}">
+                        <img class="img" src="{{ asset('images/ajouterEtiquette.png') }}" alt="Ajouter une étiquette">
+                    </a>
+                </div>
             </div>
         </form>
         <table class="table table-bordered">
             <thead>
                 <tr>
-                    <th>ID</th>
+                    <th>N°</th>
                     <th>État</th>
                     <th>Disponibilité</th>
                     <th>Actions</th>
