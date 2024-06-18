@@ -3,69 +3,28 @@
 namespace App\Entity;
 
 use App\Repository\IncidenceRepository;
-use Doctrine\Common\Collections\ArrayCollection;
-use Doctrine\Common\Collections\Collection;
 use Doctrine\ORM\Mapping as ORM;
 
 #[ORM\Entity(repositoryClass: IncidenceRepository::class)]
+#[ORM\Table(name: "incidence")]
 class Incidence
 {
     #[ORM\Id]
     #[ORM\GeneratedValue]
-    #[ORM\Column]
-    private ?int $id = null;
+    #[ORM\Column(type: 'integer')]
+    private $id;
 
-    /**
-     * @var Collection<int, Camion>
-     */
-    #[ORM\ManyToMany(targetEntity: Camion::class, inversedBy: 'incidences')]
-    private Collection $camion;
+    #[ORM\Column(type: 'string', length: 30)]
+    private $type;
 
-    #[ORM\Column(length: 30)]
-    private ?string $type = null;
+    #[ORM\Column(type: 'string', length: 255)]
+    private $description;
 
-    #[ORM\Column(length: 255)]
-    private ?string $description = null;
-
-    public function __construct()
-    {
-        $this->camion = new ArrayCollection();
-    }
+    // Getters and setters...
 
     public function getId(): ?int
     {
         return $this->id;
-    }
-
-    public function setId(int $id): static
-    {
-        $this->id = $id;
-
-        return $this;
-    }
-
-    /**
-     * @return Collection<int, Camion>
-     */
-    public function getCamion(): Collection
-    {
-        return $this->camion;
-    }
-
-    public function addCamion(Camion $camion): static
-    {
-        if (!$this->camion->contains($camion)) {
-            $this->camion->add($camion);
-        }
-
-        return $this;
-    }
-
-    public function removeCamion(Camion $camion): static
-    {
-        $this->camion->removeElement($camion);
-
-        return $this;
     }
 
     public function getType(): ?string
@@ -73,7 +32,7 @@ class Incidence
         return $this->type;
     }
 
-    public function setType(string $type): static
+    public function setType(string $type): self
     {
         $this->type = $type;
 
@@ -85,7 +44,7 @@ class Incidence
         return $this->description;
     }
 
-    public function setDescription(string $description): static
+    public function setDescription(string $description): self
     {
         $this->description = $description;
 

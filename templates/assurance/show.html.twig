@@ -1,0 +1,56 @@
+{% extends 'assurance/base.html.twig' %}
+
+{% block title %}Assurance{% endblock %}
+
+{% block stylesheets %}
+    <style>
+        .table th, .table td {
+            vertical-align: middle;
+        }
+    </style>
+{% endblock %}
+
+{% block body %}
+    <div class="container mt-5">
+        <div class="card">
+            <div class="card-header">
+                <h1 class="mb-0"><i class="fas fa-info-circle"></i> Détails Assurance</h1>
+            </div>
+            <div class="card-body">
+                <table class="table table-bordered">
+                    <tbody>
+                    <tr>
+                        <th>Id</th>
+                        <td>{{ assurance.id }}</td>
+                    </tr>
+                    <tr>
+                        <th>Date Debut</th>
+                        <td>{{ assurance.dateDebut ? assurance.dateDebut|date('Y-m-d') : '' }}</td>
+                    </tr>
+                    <tr>
+                        <th>Date Fin</th>
+                        <td>{{ assurance.dateFin ? assurance.dateFin|date('Y-m-d') : '' }}</td>
+                    </tr>
+                    <tr>
+                        <th>Compagnie</th>
+                        <td>{{ assurance.compagnie }}</td>
+                    </tr>
+                    <tr>
+                        <th>Num Police</th>
+                        <td>{{ assurance.numPolice }}</td>
+                    </tr>
+                    </tbody>
+                </table>
+                <div class="mt-3">
+                    <a href="{{ path('app_assurance_index') }}" class="btn btn-secondary">
+                        <i class="fas fa-arrow-left"></i> Retour à la liste
+                    </a>
+                    <a href="{{ path('app_assurance_edit', {'id': assurance.id}) }}" class="btn btn-primary">
+                        <i class="fas fa-edit"></i> Modifier
+                    </a>
+                    {{ include('assurance/_delete_form.html.twig', { 'class': 'd-inline' }) }}
+                </div>
+            </div>
+        </div>
+    </div>
+{% endblock %}

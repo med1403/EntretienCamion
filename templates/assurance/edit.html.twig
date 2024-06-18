@@ -1,0 +1,42 @@
+{% extends 'assurance/base.html.twig' %}
+
+{% block title %}Modier Assurance{% endblock %}
+
+{% block stylesheets %}
+    <style>
+        .card {
+            border-radius: 0;
+        }
+        .delete{
+            border: 1px solid black;
+            width: 150px;
+            border-radius: 5px;
+            background-color: red;
+            color: white;
+            height: 40px;
+            text-align: center;
+        }
+    </style>
+{% endblock %}
+
+{% block body %}
+    <div class="container mt-5">
+        <div class="card">
+            <div class="card-header">
+                <h1 class="mb-0"><i class="fas fa-edit"></i> Modifier</h1>
+            </div>
+            <div class="card-body">
+                {{ include('assurance/_form.html.twig', {'button_label': 'Update'}) }}
+                <div class="mt-3">
+                    <a href="{{ path('app_assurance_index') }}" class="btn btn-secondary">
+                        <i class="fas fa-arrow-left"></i> Retour à la liste
+                    </a>
+                    <div class="delete btn btn-danger">
+                        {{ include('assurance/_delete_form.html.twig', { 'class': 'd-inline' }) }}
+                    </div>
+
+                </div>
+            </div>
+        </div>
+    </div>
+{% endblock %}
