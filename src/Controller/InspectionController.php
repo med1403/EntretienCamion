@@ -23,7 +23,9 @@ class InspectionController extends AbstractController
                 ->leftJoin('i.camion', 'c') // If you want to search by camion fields as well
                 ->leftJoin('i.inspecteur', 'insp') // If you want to search by inspecteur fields as well
                 ->where('i.commentaire LIKE :search')
-                 // Assuming 'name' is the correct field name in Inspecteur entity
+                ->orWhere('i.dateInspection LIKE :search')
+                ->orWhere('i.resultat LIKE :search')
+                ->orWhere('c.remorque LIKE :search')  // Assuming 'name' is the correct field name in Inspecteur entity
                 ->setParameter('search', '%'.$search.'%')
                 ->getQuery()
                 ->getResult()

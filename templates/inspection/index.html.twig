@@ -30,6 +30,8 @@
                     <th>ID</th>
                     <th>Date Inspection</th>
                     <th>Résultat</th>
+                    <th>Categorie Camion</th>
+                    <th>Type de Camion</th>
                     <th>Commentaire</th>
                     <th>Inspecteur</th>
                     <th>Actions</th>
@@ -41,6 +43,8 @@
                         <td>{{ inspection.id }}</td>
                         <td>{{ inspection.dateInspection ? inspection.dateInspection|date('Y-m-d') : '' }}</td>
                         <td>{{ inspection.resultat ? 'Passé' : 'Échoué' }}</td>
+                        <td>{{ inspection.camion.typeCamion.nom }}</td>
+                        <td>{{ inspection.camion.categorie.nom }}</td>
                         <td>{{ inspection.commentaire }}</td>
                         <td>{{ inspection.inspecteur ? inspection.inspecteur.nom : '' }}</td>
                         <td>
@@ -58,14 +62,14 @@
                     </tr>
                 {% else %}
                     <tr>
-                        <td colspan="6">No records found</td>
+                        <td colspan="6">Aucune Inspection </td>
                     </tr>
                 {% endfor %}
                 </tbody>
             </table>
         </div>
         <a href="{{ path('app_inspection_new') }}" class="btn btn-success">
-            <i class="fas fa-plus-circle"></i> Créer un nouveau
+            <i class="fas fa-plus-circle"></i> Engistrer 
         </a>
     </div>
 {% endblock %}
