@@ -1,0 +1,16 @@
+{% extends 'base.html.twig' %}
+
+{% block body %}
+    <div class="card mt-5 shadow-sm">
+        <div class="card-header">
+            <h3 class="mb-0">Détails de la Réparation</h3>
+        </div>
+        <div class="card-body">
+            <p><strong>Incident ID:</strong> {{ reparation.incident.id }}</p>
+            <p><strong>Date de réparation:</strong> {{ reparation.datereparation|date('Y-m-d') }}</p>
+            <p><strong>Description:</strong> {{ reparation.description }}</p>
+            <p><strong>Coût:</strong> {{ reparation.cout }} GNF</p>
+            <a href="{{ path('reparation_list') }}" class="btn btn-secondary">Retour à la liste</a>
+        </div>
+    </div>
+{% endblock %}
