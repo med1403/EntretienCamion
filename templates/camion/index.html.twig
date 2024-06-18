@@ -1,0 +1,65 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}Camion Index{% endblock %}
+
+{% block body %}
+    <div class=" mt-4">
+        <h1 class="text-center">Gestion des Camions </h1>
+        
+        <div class="mb-3">
+            <a href="{{ path('app_camion_new') }}" class="btn btn-primary">Ajouter</a>
+        </div> <!-- Utiliser la classe table-responsive -->
+            <table class="table table-bordered w-100">
+                <thead class="thead-dark">
+                    <tr>
+                        <th scope="col">Id</th>
+                        <th scope="col">Remorque</th>
+                        <th scope="col">Date d'Intégration</th>
+                        <th scope="col">Location</th>
+                        <th scope="col">Statut</th>
+                        <th scope="col">Type Compte</th>
+                        <th scope="col">Tracteur</th>
+                        <th scope="col">Categorie</th>
+                        <th scope="col">Observation</th>
+                        <th scope="col">Km Actuel</th>
+                        <th scope="col">Actions</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    {% for camion in camions %}
+                        <tr>
+                            <td>{{ camion.id }}</td>
+                            <td>{{ camion.remorque }}</td>
+                            <td>{{ camion.dateIntegration ? camion.dateIntegration|date('Y-m-d') : '' }}</td>
+                            <td>{{ camion.location }}</td>
+                            <td>{{ camion.statut }}</td>
+                            <td>{{ camion.typeCamion.nom}}</td>
+                            <td>{{ camion.tracteur.nom }}</td>
+                            <td>{{ camion.categorie.nom }}</td>
+                            <td>{{ camion.observation }}</td>
+                            <td>{{ camion.kmActuel }}</td>
+                            <td>
+                                <a href="{{ path('app_camion_show', {'id': camion.id}) }}" class="btn btn-info btn-sm">
+                                    <i class="fas fa-eye"></i> Show
+                                </a>
+                                <a href="{{ path('app_camion_edit', {'id': camion.id}) }}" class="btn btn-warning btn-sm">
+                                    <i class="fas fa-edit"></i> Edit
+                                </a>
+                                <form method="post" action="{{ path('app_camion_delete', {'id': camion.id}) }}" style="display:inline-block;" onsubmit="return confirm('Are you sure you want to delete this item?');">
+                                    <input type="hidden" name="_token" value="{{ csrf_token('delete' ~ camion.id) }}">
+                                    <button class="btn btn-danger btn-sm">
+                                        <i class="fas fa-trash-alt"></i> Delete
+                                    </button>
+                                </form>
+                            </td>
+                        </tr>
+                    {% else %}
+                        <tr>
+                            <td colspan="8" class="text-center">Aucun Enregistrement !</td>
+                        </tr>
+                    {% endfor %}
+                </tbody>
+            </table>
+        </div>
+    </div>
+{% endblock %}
