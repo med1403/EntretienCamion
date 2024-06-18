@@ -15,10 +15,21 @@ use Symfony\Component\Routing\Attribute\Route;
 class CamionController extends AbstractController
 {
     #[Route('/', name: 'app_camion_index', methods: ['GET'])]
-    public function index(CamionRepository $camionRepository): Response
+    public function index(Request $request, CamionRepository $camionRepository): Response
     {
+        $search = $request->query->get('search');
+        $camions = $search
+            ? $camionRepository->createQueryBuilder('c')
+                ->leftJoin('c.typeCamion', 't')
+                ->leftJoin('c.categorie', 'cat')
+                ->where('t.nom LIKE :search OR cat.nom LIKE :search')
+                ->setParameter('search', '%'.$search.'%')
+                ->getQuery()
+                ->getResult()
+            : $camionRepository->findAll();
+
         return $this->render('camion/index.html.twig', [
-            'camions' => $camionRepository->findAll(),
+            'camions' => $camions,
         ]);
     }
 
