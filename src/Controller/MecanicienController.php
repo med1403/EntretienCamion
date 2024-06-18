@@ -15,10 +15,19 @@ use Symfony\Component\Routing\Attribute\Route;
 class MecanicienController extends AbstractController
 {
     #[Route('/', name: 'app_mecanicien_index', methods: ['GET'])]
-    public function index(MecanicienRepository $mecanicienRepository): Response
+    public function index(MecanicienRepository $mecanicienRepository, Request $request): Response
     {
+        $search = $request->query->get('search');
+        $mecaniciens = $search
+            ? $mecanicienRepository->createQueryBuilder('m')
+                ->where('m.nom LIKE :search OR m.prenom LIKE :search OR m.contact LIKE :search')
+                ->setParameter('search', '%'.$search.'%')
+                ->getQuery()
+                ->getResult()
+            : $mecanicienRepository->findAll();
+
         return $this->render('mecanicien/index.html.twig', [
-            'mecaniciens' => $mecanicienRepository->findAll(),
+            'mecaniciens' => $mecaniciens,
         ]);
     }
 

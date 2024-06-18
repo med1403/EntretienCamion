@@ -1,0 +1,84 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+    <meta charset="UTF-8">
+    <title>{% block title %}Bienvenue!{% endblock %}</title>
+    <link href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css" rel="stylesheet">
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.4/css/all.min.css" rel="stylesheet">
+    <link href="https://cdn.jsdelivr.net/npm/flatpickr/dist/flatpickr.min.css" rel="stylesheet">
+    <style>
+        body {
+            background: linear-gradient(to right, rgba(0, 123, 255, 0.5) 0%, rgba(128, 128, 128, 0.5) 100%);
+            margin: 0;
+            padding-top: 70px;
+        }
+        .container {
+            max-width: auto;
+            margin: auto;
+            background: white;
+            padding: 20px;
+            border-radius: 8px;
+            box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+        }
+        .navbar-brand {
+            font-size: 30px;
+            font-weight: bold;
+        }
+        .navbar-brand, .nav-link {
+            color: black !important;
+        }
+        .nav-link {
+            margin-right: 15px;
+            color: black;
+            font-weight: unset;
+            font-size: 20px;
+        }
+        .nav-link:hover{
+            border: 1px solid;
+            border-radius: 5px;
+            background-color: #8080807F;
+            color: white;
+        }
+        .fa-scroll-top{
+            margin-bottom: 10px;
+        }
+    </style>
+    {% block stylesheets %}{% endblock %}
+</head>
+<body>
+<nav class="navbar navbar-expand-lg navbar-dark fa-scroll-top">
+    <div class="container">
+        <a class="navbar-brand" href="#">Gestion des Mécaniciens</a>
+        <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarNav"
+                aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">
+            <span class="navbar-toggler-icon"></span>
+        </button>
+        <div class="collapse navbar-collapse" id="navbarNav">
+            <ul class="navbar-nav ml-auto">
+                <li class="nav-item">
+                    <a class="nav-link" href="{{ path('app_mecanicien_index') }}"><i class="fa fa-table"></i> Liste des Mécaniciens</a>
+                </li>
+            </ul>
+        </div>
+    </div>
+</nav>
+<div class="container">
+    {% block body %}{% endblock %}
+</div>
+<script src="https://code.jquery.com/jquery-3.5.1.slim.min.js"></script>
+<script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.9.2/dist/umd/popper.min.js"></script>
+<script src="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js"></script>
+<script src="https://cdn.jsdelivr.net/npm/flatpickr"></script>
+<script>
+    function flatpickr(s, param2) {
+    }
+    document.addEventListener('DOMContentLoaded', function () {
+        flatpickr(".js-datepicker", {
+            enableTime: true,
+            dateFormat: "Y-m-d H:i",
+        });
+    });
+</script>
+{% block javascripts %}{% endblock %}
+</body>
+</html>
