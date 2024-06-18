@@ -1,0 +1,22 @@
+{% extends 'incident/base.html.twig' %}
+{% block title %}Details D'Incident{% endblock %}
+{% block stylesheets %}
+    <style>
+        .card {
+            border-radius: 0;
+        }
+    </style>
+{% endblock %}
+
+{% block body %}
+    <div class="card mt-5 shadow-sm">
+        <div class="card-header">
+            <h3 class="mb-0">Details D'Incident</h3>
+        </div>
+        <div class="card-body">
+            <p><strong>Type :</strong> {{ incidence.type }}</p>
+            <p><strong>Description :</strong> {{ incidence.description }}</p>
+            <a href="{{ path('incident_list') }}" class="btn btn-secondary">Retour à la liste</a>
+        </div>
+    </div>
+{% endblock %}
