@@ -1,0 +1,35 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}GradeVidenge index{% endblock %}
+
+{% block body %}
+    <h1>GradeVidenge index</h1>
+
+    <table class="table">
+        <thead>
+            <tr>
+                <th>Id</th>
+                <th>Nom</th>
+                <th>actions</th>
+            </tr>
+        </thead>
+        <tbody>
+        {% for grade_videnge in grade_videnges %}
+            <tr>
+                <td>{{ grade_videnge.id }}</td>
+                <td>{{ grade_videnge.nom }}</td>
+                <td>
+                    <a href="{{ path('app_grade_videnge_show', {'id': grade_videnge.id}) }}">show</a>
+                    <a href="{{ path('app_grade_videnge_edit', {'id': grade_videnge.id}) }}">edit</a>
+                </td>
+            </tr>
+        {% else %}
+            <tr>
+                <td colspan="3">no records found</td>
+            </tr>
+        {% endfor %}
+        </tbody>
+    </table>
+
+    <a href="{{ path('app_grade_videnge_new') }}">Create new</a>
+{% endblock %}
