@@ -1,0 +1,52 @@
+{% extends 'videnge/base.html.twig' %}
+
+{% block title %}Modifier Videnge{% endblock %}
+
+{% block stylesheets %}
+    <style>
+        .card {
+            border-radius: 0;
+        }
+    </style>
+{% endblock %}
+
+{% block javascripts %}
+    <script>
+        document.addEventListener('DOMContentLoaded', function () {
+            function flatpickr(s, param2) {
+                // Code flatpickr
+            }
+
+            flatpickr(".js-datepicker", {
+                enableTime: true,
+                dateFormat: "Y-m-d H:i",
+            });
+        });
+    </script>
+{% endblock %}
+
+{% block body %}
+    <div class="card mt-5 shadow-sm mx-auto" style="max-width: 600px;">
+        <div class="card-header">
+            <h3 class="mb-0"><i class="fas fa-edit"></i> Modifier Videnge</h3>
+        </div>
+        <div class="card-body">
+            {{ form_start(form) }}
+            <div class="form-group">
+                {{ form_label(form.kmVidenge) }}
+                {{ form_widget(form.kmVidenge, {'attr': {'class': 'form-control', 'placeholder': 'Entrez le kilométrage du videnge'}}) }}
+            </div>
+            <div class="form-group">
+                {{ form_label(form.gradeVidenge) }}
+                {{ form_widget(form.gradeVidenge, {'attr': {'class': 'form-control', 'placeholder': 'Sélectionnez le grade du videnge'}}) }}
+            </div>
+            <div class="form-group">
+                {{ form_label(form.ecartType) }}
+                {{ form_widget(form.ecartType, {'attr': {'class': 'form-control', 'placeholder': 'Entrez l\'écart type'}}) }}
+            </div>
+            <button class="btn btn-primary"><i class="fas fa-save"></i> Enregistrer</button>
+            {{ form_end(form) }}
+            <a href="{{ path('app_videnge_index') }}" class="btn btn-secondary mt-3"><i class="fas fa-arrow-left"></i> Retour à la liste</a>
+        </div>
+    </div>
+{% endblock %}
