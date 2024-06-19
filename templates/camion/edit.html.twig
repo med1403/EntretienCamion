@@ -1,0 +1,76 @@
+{% extends 'camion/base.html.twig' %}
+
+{% block title %}Modifier Camion{% endblock %}
+
+{% block stylesheets %}
+    <style>
+        .card {
+            border-radius: 0;
+        }
+    </style>
+{% endblock %}
+
+{% block javascripts %}
+    <script>
+        document.addEventListener('DOMContentLoaded', function () {
+            function flatpickr(s, param2) {
+
+            }
+
+            flatpickr(".js-datepicker", {
+                enableTime: true,
+                dateFormat: "Y-m-d H:i",
+            });
+        });
+    </script>
+{% endblock %}
+
+{% block body %}
+    <div class="card mt-5 shadow-sm mx-auto" style="max-width: 600px;">
+        <div class="card-header">
+            <h3 class="mb-0"><i class="fas fa-edit"></i> Modifier Camion</h3>
+        </div>
+        <div class="card-body">
+            {{ form_start(form) }}
+            <div class="form-group">
+                {{ form_label(form.remorque) }}
+                {{ form_widget(form.remorque, {'attr': {'class': 'form-control', 'placeholder': 'Entrez le numéro de remorque'}}) }}
+            </div>
+            <div class="form-group">
+                {{ form_label(form.dateIntegration) }}
+                {{ form_widget(form.dateIntegration, {'attr': {'class': 'form-control js-datepicker', 'placeholder': 'Entrez la date d\'intégration'}}) }}
+            </div>
+            <div class="form-group">
+                {{ form_label(form.location) }}
+                {{ form_widget(form.location, {'attr': {'class': 'form-control', 'placeholder': 'Entrez la localisation'}}) }}
+            </div>
+            <div class="form-group">
+                {{ form_label(form.statut) }}
+                {{ form_widget(form.statut, {'attr': {'class': 'form-control', 'placeholder': 'Entrez le statut'}}) }}
+            </div>
+            <div class="form-group">
+                {{ form_label(form.typeCamion) }}
+                {{ form_widget(form.typeCamion, {'attr': {'class': 'form-control', 'placeholder': 'Sélectionnez le type de camion'}}) }}
+            </div>
+            <div class="form-group">
+                {{ form_label(form.tracteur) }}
+                {{ form_widget(form.tracteur, {'attr': {'class': 'form-control', 'placeholder': 'Sélectionnez le tracteur'}}) }}
+            </div>
+            <div class="form-group">
+                {{ form_label(form.categorie) }}
+                {{ form_widget(form.categorie, {'attr': {'class': 'form-control', 'placeholder': 'Sélectionnez la catégorie'}}) }}
+            </div>
+            <div class="form-group">
+                {{ form_label(form.observation) }}
+                {{ form_widget(form.observation, {'attr': {'class': 'form-control', 'placeholder': 'Entrez les observations'}}) }}
+            </div>
+            <div class="form-group">
+                {{ form_label(form.kmActuel) }}
+                {{ form_widget(form.kmActuel, {'attr': {'class': 'form-control', 'placeholder': 'Entrez le kilométrage actuel'}}) }}
+            </div>
+            <button class="btn btn-primary"><i class="fas fa-save"></i> Enregistrer</button>
+            {{ form_end(form) }}
+            <a href="{{ path('app_camion_index') }}" class="btn btn-secondary mt-3"><i class="fas fa-arrow-left"></i> Retour à la liste</a>
+        </div>
+    </div>
+{% endblock %}

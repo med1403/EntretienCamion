@@ -1,0 +1,37 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}TypeCamion index{% endblock %}
+
+{% block body %}
+    <h1>TypeCamion index</h1>
+
+    <table class="table">
+        <thead>
+            <tr>
+                <th>Id</th>
+                <th>Nom</th>
+                <th>KmVidenge</th>
+                <th>actions</th>
+            </tr>
+        </thead>
+        <tbody>
+        {% for type_camion in type_camions %}
+            <tr>
+                <td>{{ type_camion.id }}</td>
+                <td>{{ type_camion.nom }}</td>
+                <td>{{ type_camion.kmVidenge }}</td>
+                <td>
+                    <a href="{{ path('app_type_camion_show', {'id': type_camion.id}) }}">show</a>
+                    <a href="{{ path('app_type_camion_edit', {'id': type_camion.id}) }}">edit</a>
+                </td>
+            </tr>
+        {% else %}
+            <tr>
+                <td colspan="4">no records found</td>
+            </tr>
+        {% endfor %}
+        </tbody>
+    </table>
+
+    <a href="{{ path('app_type_camion_new') }}">Create new</a>
+{% endblock %}

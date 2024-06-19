@@ -1,17 +1,21 @@
-{# templates/truck/new.html.twig #}
-
-{% extends 'base.html.twig' %}
-
-{% block title %}New Truck{% endblock %}
-
-{% block body %}
-    <div class="form-container">
-        <div class="form-group">
-            <h1>Create new Truck</h1>
-
-            {{ include('truck/_form.html.twig', {'form': form}) }}
-
-            <a href="{{ path('app_truck_index') }}">back to list</a>
-        </div>
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="UTF-8">
+    <title>{% block title %}Welcome!{% endblock %}</title>
+    {% block stylesheets %}
+        {# <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css"> #}
+        <link rel="stylesheet" type="text/css" href="{{ asset('css/bootstrap.min.css') }}">
+    {% endblock %}
+</head>
+<body>
+    <div class="container">
+        {% block body %}{% endblock %}
     </div>
-{% endblock %}
+    {% block javascripts %}
+        <script src="{{asset('js/jquery-3.5.1.slim.min.js')}}"></script>
+        <script src="{{asset('js/popper.min.js')}}"></script>
+        <script src="{{asset('js/bootstrap.min.js')}}"></script>
+    {% endblock %}
+</body>
+</html>
