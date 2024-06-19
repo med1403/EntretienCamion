@@ -1,30 +1,52 @@
-{% extends 'base.html.twig' %}
+{% extends 'videnge/base.html.twig' %}
 
-{% block title %}Videnge{% endblock %}
+{% block title %}Détails Videnge{% endblock %}
+
+{% block stylesheets %}
+    <style>
+        .table th, .table td {
+            vertical-align: middle;
+        }
+    </style>
+{% endblock %}
 
 {% block body %}
-    <h1>Videnge</h1>
-
-    <table class="table">
-        <tbody>
-            <tr>
-                <th>Id</th>
-                <td>{{ videnge.id }}</td>
-            </tr>
-            <tr>
-                <th>KmVidenge</th>
-                <td>{{ videnge.kmVidenge }}</td>
-            </tr>
-            <tr>
-                <th>EcartType</th>
-                <td>{{ videnge.ecartType }}</td>
-            </tr>
-        </tbody>
-    </table>
-
-    <a href="{{ path('app_videnge_index') }}">back to list</a>
-
-    <a href="{{ path('app_videnge_edit', {'id': videnge.id}) }}">edit</a>
-
-    {{ include('videnge/_delete_form.html.twig') }}
+    <div class="container mt-5">
+        <div class="card">
+            <div class="card-header">
+                <h1 class="mb-0"><i class="fas fa-info-circle"></i> Détails Videnge</h1>
+            </div>
+            <div class="card-body">
+                <table class="table table-bordered">
+                    <tbody>
+                        <tr>
+                            <th>Id</th>
+                            <td>{{ videnge.id }}</td>
+                        </tr>
+                        <tr>
+                            <th>Kilométrage</th>
+                            <td>{{ videnge.kmVidenge }}</td>
+                        </tr>
+                        <tr>
+                            <th>Écart Type</th>
+                            <td>{{ videnge.ecartType }}</td>
+                        </tr>
+                        <tr>
+                            <th>Camion</th>
+                            <td>{{ videnge.camion }}</td>
+                        </tr>
+                    </tbody>
+                </table>
+                <div class="mt-3">
+                    <a href="{{ path('app_videnge_index') }}" class="btn btn-secondary">
+                        <i class="fas fa-arrow-left"></i> Retour à la liste
+                    </a>
+                    <a href="{{ path('app_videnge_edit', {'id': videnge.id}) }}" class="btn btn-primary">
+                        <i class="fas fa-edit"></i> Modifier
+                    </a>
+                    {{ include('videnge/_delete_form.html.twig', { 'class': 'd-inline' }) }}
+                </div>
+            </div>
+        </div>
+    </div>
 {% endblock %}
