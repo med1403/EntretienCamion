@@ -15,12 +15,22 @@ use Symfony\Component\Routing\Attribute\Route;
 class ControleurController extends AbstractController
 {
     #[Route('/', name: 'app_controleur_index', methods: ['GET'])]
-    public function index(ControleurRepository $controleurRepository): Response
+    public function index(ControleurRepository $controleurRepository, Request $request): Response
     {
+        $search = $request->query->get('search');
+        $controleurs = $search 
+            ? $controleurRepository->createQueryBuilder('c')
+                ->where('c.nom LIKE :search OR c.numeroDeBadge LIKE :search')
+                ->setParameter('search', '%'.$search.'%')
+                ->getQuery()
+                ->getResult()
+            : $controleurRepository->findAll();
+
         return $this->render('controleur/index.html.twig', [
-            'controleurs' => $controleurRepository->findAll(),
+            'controleurs' => $controleurs,
         ]);
     }
+
 
     #[Route('/new', name: 'app_controleur_new', methods: ['GET', 'POST'])]
     public function new(Request $request, EntityManagerInterface $entityManager): Response
