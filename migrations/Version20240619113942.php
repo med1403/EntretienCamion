@@ -10,7 +10,7 @@ use Doctrine\Migrations\AbstractMigration;
 /**
  * Auto-generated Migration: Please modify to your needs!
  */
-final class Version20240618194441 extends AbstractMigration
+final class Version20240619113942 extends AbstractMigration
 {
     public function getDescription(): string
     {
@@ -38,7 +38,7 @@ final class Version20240618194441 extends AbstractMigration
         $this->addSql('CREATE TABLE historique_camion_camion (historique_camion_id INT NOT NULL, camion_id INT NOT NULL, INDEX IDX_1226BE9550D44D9B (historique_camion_id), INDEX IDX_1226BE953A706D3 (camion_id), PRIMARY KEY(historique_camion_id, camion_id)) DEFAULT CHARACTER SET utf8mb4 COLLATE `utf8mb4_unicode_ci` ENGINE = InnoDB');
         $this->addSql('CREATE TABLE incidence (id INT AUTO_INCREMENT NOT NULL, type VARCHAR(30) NOT NULL, description VARCHAR(255) NOT NULL, PRIMARY KEY(id)) DEFAULT CHARACTER SET utf8mb4 COLLATE `utf8mb4_unicode_ci` ENGINE = InnoDB');
         $this->addSql('CREATE TABLE inspecteur (id INT AUTO_INCREMENT NOT NULL, nom VARCHAR(50) NOT NULL, prenom VARCHAR(50) NOT NULL, contact VARCHAR(50) NOT NULL, PRIMARY KEY(id)) DEFAULT CHARACTER SET utf8mb4 COLLATE `utf8mb4_unicode_ci` ENGINE = InnoDB');
-        $this->addSql('CREATE TABLE inspection (id INT AUTO_INCREMENT NOT NULL, inspecteur_id INT DEFAULT NULL, date_inspection DATE NOT NULL, resultat TINYINT(1) NOT NULL, commentaire LONGTEXT NOT NULL, INDEX IDX_F9F13485B7728AA0 (inspecteur_id), PRIMARY KEY(id)) DEFAULT CHARACTER SET utf8mb4 COLLATE `utf8mb4_unicode_ci` ENGINE = InnoDB');
+        $this->addSql('CREATE TABLE inspection (id INT AUTO_INCREMENT NOT NULL, camion_id INT DEFAULT NULL, inspecteur_id INT DEFAULT NULL, date_inspection DATE NOT NULL, resultat TINYINT(1) NOT NULL, commentaire LONGTEXT NOT NULL, INDEX IDX_F9F134853A706D3 (camion_id), INDEX IDX_F9F13485B7728AA0 (inspecteur_id), PRIMARY KEY(id)) DEFAULT CHARACTER SET utf8mb4 COLLATE `utf8mb4_unicode_ci` ENGINE = InnoDB');
         $this->addSql('CREATE TABLE list_piece (id INT AUTO_INCREMENT NOT NULL, quantite INT NOT NULL, prix_total DOUBLE PRECISION NOT NULL, PRIMARY KEY(id)) DEFAULT CHARACTER SET utf8mb4 COLLATE `utf8mb4_unicode_ci` ENGINE = InnoDB');
         $this->addSql('CREATE TABLE list_piece_piece (list_piece_id INT NOT NULL, piece_id INT NOT NULL, INDEX IDX_D9C639C3BA62FCC8 (list_piece_id), INDEX IDX_D9C639C3C40FCFA8 (piece_id), PRIMARY KEY(list_piece_id, piece_id)) DEFAULT CHARACTER SET utf8mb4 COLLATE `utf8mb4_unicode_ci` ENGINE = InnoDB');
         $this->addSql('CREATE TABLE mecanicien (id INT AUTO_INCREMENT NOT NULL, nom VARCHAR(50) NOT NULL, prenom VARCHAR(100) NOT NULL, contact VARCHAR(255) NOT NULL, adresse VARCHAR(50) NOT NULL, PRIMARY KEY(id)) DEFAULT CHARACTER SET utf8mb4 COLLATE `utf8mb4_unicode_ci` ENGINE = InnoDB');
@@ -71,6 +71,7 @@ final class Version20240618194441 extends AbstractMigration
         $this->addSql('ALTER TABLE historique_chauffeur ADD CONSTRAINT FK_FD43CF085C0B3BE FOREIGN KEY (chauffeur_id) REFERENCES chauffeur (id) ON DELETE CASCADE');
         $this->addSql('ALTER TABLE historique_camion_camion ADD CONSTRAINT FK_1226BE9550D44D9B FOREIGN KEY (historique_camion_id) REFERENCES historique_camion (id) ON DELETE CASCADE');
         $this->addSql('ALTER TABLE historique_camion_camion ADD CONSTRAINT FK_1226BE953A706D3 FOREIGN KEY (camion_id) REFERENCES camion (id) ON DELETE CASCADE');
+        $this->addSql('ALTER TABLE inspection ADD CONSTRAINT FK_F9F134853A706D3 FOREIGN KEY (camion_id) REFERENCES camion (id)');
         $this->addSql('ALTER TABLE inspection ADD CONSTRAINT FK_F9F13485B7728AA0 FOREIGN KEY (inspecteur_id) REFERENCES inspecteur (id)');
         $this->addSql('ALTER TABLE list_piece_piece ADD CONSTRAINT FK_D9C639C3BA62FCC8 FOREIGN KEY (list_piece_id) REFERENCES list_piece (id) ON DELETE CASCADE');
         $this->addSql('ALTER TABLE list_piece_piece ADD CONSTRAINT FK_D9C639C3C40FCFA8 FOREIGN KEY (piece_id) REFERENCES piece (id) ON DELETE CASCADE');
@@ -106,6 +107,7 @@ final class Version20240618194441 extends AbstractMigration
         $this->addSql('ALTER TABLE historique_chauffeur DROP FOREIGN KEY FK_FD43CF085C0B3BE');
         $this->addSql('ALTER TABLE historique_camion_camion DROP FOREIGN KEY FK_1226BE9550D44D9B');
         $this->addSql('ALTER TABLE historique_camion_camion DROP FOREIGN KEY FK_1226BE953A706D3');
+        $this->addSql('ALTER TABLE inspection DROP FOREIGN KEY FK_F9F134853A706D3');
         $this->addSql('ALTER TABLE inspection DROP FOREIGN KEY FK_F9F13485B7728AA0');
         $this->addSql('ALTER TABLE list_piece_piece DROP FOREIGN KEY FK_D9C639C3BA62FCC8');
         $this->addSql('ALTER TABLE list_piece_piece DROP FOREIGN KEY FK_D9C639C3C40FCFA8');

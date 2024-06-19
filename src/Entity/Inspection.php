@@ -16,11 +16,8 @@ class Inspection
     #[ORM\Column]
     private ?int $id = null;
 
-    /**
-     * @var Collection<int, Camion>
-     */
-    #[ORM\OneToMany(targetEntity: Camion::class, mappedBy: 'inspection')]
-    private Collection $camion;
+    #[ORM\ManyToOne(targetEntity: Camion::class, inversedBy: 'inspections')]
+    private ?Camion $camion = null;
 
     #[ORM\Column(type: Types::DATE_MUTABLE)]
     private ?\DateTimeInterface $dateInspection = null;
@@ -34,11 +31,6 @@ class Inspection
     #[ORM\ManyToOne(inversedBy: 'inspection')]
     private ?Inspecteur $inspecteur = null;
 
-    public function __construct()
-    {
-        $this->camion = new ArrayCollection();
-    }
-
     public function getId(): ?int
     {
         return $this->id;
@@ -51,32 +43,14 @@ class Inspection
         return $this;
     }
 
-    /**
-     * @return Collection<int, Camion>
-     */
-    public function getCamion(): Collection
+    public function getCamion(): ?Camion
     {
         return $this->camion;
     }
 
-    public function addCamion(Camion $camion): static
+    public function setCamion(?Camion $camion): static
     {
-        if (!$this->camion->contains($camion)) {
-            $this->camion->add($camion);
-            $camion->setInspection($this);
-        }
-
-        return $this;
-    }
-
-    public function removeCamion(Camion $camion): static
-    {
-        if ($this->camion->removeElement($camion)) {
-            // set the owning side to null (unless already changed)
-            if ($camion->getInspection() === $this) {
-                $camion->setInspection(null);
-            }
-        }
+        $this->camion = $camion;
 
         return $this;
     }

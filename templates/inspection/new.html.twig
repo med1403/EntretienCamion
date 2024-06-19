@@ -1,0 +1,56 @@
+{% extends 'inspection/base.html.twig' %}
+
+{% block title %}Nouvelle Inspection{% endblock %}
+
+{% block stylesheets %}
+    <style>
+        .card {
+            border-radius: 0;
+        }
+    </style>
+{% endblock %}
+
+{% block javascripts %}
+    <script>
+        document.addEventListener('DOMContentLoaded', function () {
+            flatpickr(".js-datepicker", {
+                enableTime: true,
+                dateFormat: "Y-m-d H:i",
+            });
+        });
+    </script>
+{% endblock %}
+
+{% block body %}
+    <div class="card mt-5 shadow-sm mx-auto" style="max-width: 600px;">
+        <div class="card-header">
+            <h3 class="mb-0"><i class="fas fa-plus-circle"></i> Nouvelle Inspection</h3>
+        </div>
+        <div class="card-body">
+            {{ form_start(form) }}
+            <div class="form-group">
+                {{ form_label(form.dateInspection) }}
+                {{ form_widget(form.dateInspection, {'attr': {'class': 'form-control js-datepicker', 'placeholder': 'Enter la date de l\'inspection'}}) }}
+            </div>
+            <div class="form-group">
+                {{ form_label(form.resultat) }}
+                {{ form_widget(form.resultat, {'attr': {'class': 'form-control', 'placeholder': 'Enter le résultat'}}) }}
+            </div>
+            <div class="form-group">
+                {{ form_label(form.commentaire) }}
+                {{ form_widget(form.commentaire, {'attr': {'class': 'form-control', 'placeholder': 'Enter le commentaire'}}) }}
+            </div>
+            <div class="form-group">
+                {{ form_label(form.inspecteur) }}
+                {{ form_widget(form.inspecteur, {'attr': {'class': 'form-control', 'placeholder': 'Select the inspector'}}) }}
+            </div>
+            <div class="form-group">
+                {{ form_label(form.camion) }}
+                {{ form_widget(form.camion, {'attr': {'class': 'form-control', 'placeholder': 'Select the truck'}}) }}
+            </div>
+            <button class="btn btn-primary"><i class="fas fa-save"></i> Enregistrer</button>
+            {{ form_end(form) }}
+            <a href="{{ path('app_inspection_index') }}" class="btn btn-secondary mt-3"><i class="fas fa-arrow-left"></i> Retour à la liste</a>
+        </div>
+    </div>
+{% endblock %}
