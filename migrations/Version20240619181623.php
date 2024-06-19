@@ -10,7 +10,7 @@ use Doctrine\Migrations\AbstractMigration;
 /**
  * Auto-generated Migration: Please modify to your needs!
  */
-final class Version20240619162810 extends AbstractMigration
+final class Version20240619181623 extends AbstractMigration
 {
     public function getDescription(): string
     {
@@ -27,6 +27,7 @@ final class Version20240619162810 extends AbstractMigration
         $this->addSql('CREATE TABLE categorie (id INT AUTO_INCREMENT NOT NULL, nom VARCHAR(50) NOT NULL, PRIMARY KEY(id)) DEFAULT CHARACTER SET utf8mb4 COLLATE `utf8mb4_unicode_ci` ENGINE = InnoDB');
         $this->addSql('CREATE TABLE chauffeur (id INT AUTO_INCREMENT NOT NULL, nom VARCHAR(50) NOT NULL, prenom VARCHAR(50) NOT NULL, contact VARCHAR(50) NOT NULL, PRIMARY KEY(id)) DEFAULT CHARACTER SET utf8mb4 COLLATE `utf8mb4_unicode_ci` ENGINE = InnoDB');
         $this->addSql('CREATE TABLE checklist (id INT AUTO_INCREMENT NOT NULL, camion_id INT DEFAULT NULL, date_checklist DATE NOT NULL, INDEX IDX_5C696D2F3A706D3 (camion_id), PRIMARY KEY(id)) DEFAULT CHARACTER SET utf8mb4 COLLATE `utf8mb4_unicode_ci` ENGINE = InnoDB');
+        $this->addSql('CREATE TABLE controleur (id INT AUTO_INCREMENT NOT NULL, nom VARCHAR(255) NOT NULL, adresse VARCHAR(255) NOT NULL, numero_de_tel VARCHAR(255) NOT NULL, adresse_email VARCHAR(255) NOT NULL, numero_de_badge VARCHAR(255) NOT NULL, date_de_naissance DATE NOT NULL, categories_permis VARCHAR(255) NOT NULL, PRIMARY KEY(id)) DEFAULT CHARACTER SET utf8mb4 COLLATE `utf8mb4_unicode_ci` ENGINE = InnoDB');
         $this->addSql('CREATE TABLE etiquette (id INT AUTO_INCREMENT NOT NULL, etat VARCHAR(255) NOT NULL, disponibilite TINYINT(1) NOT NULL, PRIMARY KEY(id)) DEFAULT CHARACTER SET utf8mb4 COLLATE `utf8mb4_unicode_ci` ENGINE = InnoDB');
         $this->addSql('CREATE TABLE etiquette_camion (etiquette_id INT NOT NULL, camion_id INT NOT NULL, INDEX IDX_86CFA087BD2EA57 (etiquette_id), INDEX IDX_86CFA083A706D3 (camion_id), PRIMARY KEY(etiquette_id, camion_id)) DEFAULT CHARACTER SET utf8mb4 COLLATE `utf8mb4_unicode_ci` ENGINE = InnoDB');
         $this->addSql('CREATE TABLE grade_videnge (id INT AUTO_INCREMENT NOT NULL, nom VARCHAR(50) NOT NULL, PRIMARY KEY(id)) DEFAULT CHARACTER SET utf8mb4 COLLATE `utf8mb4_unicode_ci` ENGINE = InnoDB');
@@ -130,6 +131,7 @@ final class Version20240619162810 extends AbstractMigration
         $this->addSql('DROP TABLE categorie');
         $this->addSql('DROP TABLE chauffeur');
         $this->addSql('DROP TABLE checklist');
+        $this->addSql('DROP TABLE controleur');
         $this->addSql('DROP TABLE etiquette');
         $this->addSql('DROP TABLE etiquette_camion');
         $this->addSql('DROP TABLE grade_videnge');
