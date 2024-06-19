@@ -1,68 +1,86 @@
 {% extends 'videnge/base.html.twig' %}
 
-{% block title %}Liste des Videnge{% endblock %}
+{% block title %}Liste des Videnge
+{% endblock %}
 
 {% block stylesheets %}
-    <style>
-        .table th, .table td {
-            vertical-align: middle;
-        }
-    </style>
+	<style>
+		.table th,
+		.table td {
+			vertical-align: middle;
+		}
+	</style>
 {% endblock %}
 
 {% block body %}
-    <div class="container mt-5">
-        <h1 class="mb-4"><i class="fas fa-list"></i> Liste des Videnge</h1>
+	<div class="container mt-5">
+		<h1 class="mb-4">
+			<i class="fas fa-list"></i>
+			Liste des Videnge</h1>
 
-        <form method="get" action="{{ path('app_videnge_index') }}" class="mb-4">
-            <div class="input-group">
-                <input type="text" name="search" class="form-control" placeholder="Rechercher...">
-                <div class="input-group-append">
-                    <button class="btn btn-secondary" type="submit"><i class="fa fa-search"></i> Rechercher</button>
-                </div>
-            </div>
-        </form>
-        <a href="{{ path('app_videnge_new') }}" class="btn btn-success mb-3">
-            <i class="fas fa-plus-circle"></i> Créer un nouveau
-        </a>
+		<form method="get" action="{{ path('app_videnge_index') }}" class="mb-4">
+			<div class="input-group">
+				<input type="text" name="search" class="form-control" placeholder="Rechercher...">
+				<div class="input-group-append">
+					<button class="btn btn-secondary" type="submit">
+						<i class="fa fa-search"></i>
+						Rechercher</button>
+				</div>
+			</div>
+		</form>
+		<a href="{{ path('app_videnge_new') }}" class="btn btn-success mb-3">
+			<i class="fas fa-plus-circle"></i>
+			Enrgistrer
+		</a>
 
-        <div class="table-responsive">
-            <table class="table table-bordered">
-                <thead>
-                    <tr>
-                        <th>ID</th>
-                        <th>Kilométrage Videnge</th>
-                        <th>Écart Type</th>
-                        <th>Actions</th>
-                    </tr>
-                </thead>
-                <tbody>
-                    {% for videnge in videnges %}
-                        <tr>
-                            <td>{{ videnge.id }}</td>
-                            <td>{{ videnge.kmVidenge }}</td>
-                            <td>{{ videnge.ecartType }}</td>
-                            <td>
-                                <a href="{{ path('app_videnge_show', {'id': videnge.id}) }}" class="btn btn-info btn-sm">
-                                    <i class="fas fa-eye"></i>
-                                </a>
-                                <a href="{{ path('app_videnge_edit', {'id': videnge.id}) }}" class="btn btn-primary btn-sm">
-                                    <i class="fas fa-edit"></i>
-                                </a>
-                                <form method="post" action="{{ path('app_videnge_delete', {'id': videnge.id}) }}" style="display:inline-block" onsubmit="return confirm('Are you sure you want to delete this item?');">
-                                    <input type="hidden" name="_token" value="{{ csrf_token('delete' ~ videnge.id) }}">
-                                    <button class="btn btn-danger btn-sm"><i class="fas fa-trash-alt"></i></button>
-                                </form>
-                            </td>
-                        </tr>
-                    {% else %}
-                        <tr>
-                            <td colspan="4">No records found</td>
-                        </tr>
-                    {% endfor %}
-                </tbody>
-            </table>
-        </div>
-        
-    </div>
+		<div class="table-responsive">
+			<table class="table table-bordered">
+				<thead>
+					<tr>
+						<th>ID</th>
+						<th>Kilométrage Videnge</th>
+						<th>Écart Type</th>
+						<th>Statut</th>
+						<th>Actions</th>
+					</tr>
+				</thead>
+				<tbody>
+					{% for videnge in videnges %}
+						<tr>
+							<td>{{ videnge.id }}</td>
+							<td>{{ videnge.kmVidenge }}</td>
+							<td>{{ videnge.ecartType }}</td>
+							<td>
+								{% if videnge.statut %}
+									<span class="badge badge-success">Planifié</span>
+								{% else %}
+									<span class="badge badge-danger">Non planifié</span>
+								{% endif %}
+							</td>
+
+							<td>
+								<a href="{{ path('app_videnge_show', {'id': videnge.id}) }}" class="btn btn-info btn-sm">
+									<i class="fas fa-eye"></i>
+								</a>
+								<a href="{{ path('app_videnge_edit', {'id': videnge.id}) }}" class="btn btn-primary btn-sm">
+									<i class="fas fa-edit"></i>
+								</a>
+								<form method="post" action="{{ path('app_videnge_delete', {'id': videnge.id}) }}" style="display:inline-block" onsubmit="return confirm('Are you sure you want to delete this item?');">
+									<input type="hidden" name="_token" value="{{ csrf_token('delete' ~ videnge.id) }}">
+									<button class="btn btn-danger btn-sm">
+										<i class="fas fa-trash-alt"></i>
+									</button>
+								</form>
+							</td>
+						</tr>
+					{% else %}
+						<tr>
+							<td colspan="4">Aucun n'Enregistrement !</td>
+						</tr>
+					{% endfor %}
+				</tbody>
+			</table>
+		</div>
+
+	</div>
 {% endblock %}

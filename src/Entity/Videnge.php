@@ -36,6 +36,9 @@ class Videnge
     #[ORM\Column]
     private ?float $ecartType = null;
 
+    #[ORM\Column]
+    private ?bool $statut = null;
+
     public function __construct()
     {
         $this->camion = new ArrayCollection();
@@ -134,6 +137,18 @@ class Videnge
     public function setEcartType(float $ecartType): static
     {
         $this->ecartType = $ecartType;
+
+        return $this;
+    }
+
+    public function isStatut(): ?bool
+    {
+        return $this->statut;
+    }
+
+    public function setStatut(bool $statut): static
+    {
+        $this->statut = $statut;
 
         return $this;
     }

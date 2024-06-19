@@ -1,0 +1,30 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}ListPiece{% endblock %}
+
+{% block body %}
+    <h1>ListPiece</h1>
+
+    <table class="table">
+        <tbody>
+            <tr>
+                <th>Id</th>
+                <td>{{ list_piece.id }}</td>
+            </tr>
+            <tr>
+                <th>Quantite</th>
+                <td>{{ list_piece.quantite }}</td>
+            </tr>
+            <tr>
+                <th>Prix_total</th>
+                <td>{{ list_piece.prixTotal }}</td>
+            </tr>
+        </tbody>
+    </table>
+
+    <a href="{{ path('app_list_piece_index') }}">back to list</a>
+
+    <a href="{{ path('app_list_piece_edit', {'id': list_piece.id}) }}">edit</a>
+
+    {{ include('list_piece/_delete_form.html.twig') }}
+{% endblock %}

@@ -30,6 +30,7 @@ class VidengeController extends AbstractController
         $form->handleRequest($request);
 
         if ($form->isSubmitted() && $form->isValid()) {
+            $videnge->setStatut(true);
             $entityManager->persist($videnge);
             $entityManager->flush();
 
@@ -37,6 +38,26 @@ class VidengeController extends AbstractController
         }
 
         return $this->render('videnge/new.html.twig', [
+            'videnge' => $videnge,
+            'form' => $form,
+        ]);
+    }
+    #[Route('/planifier', name: 'app_videnge_planifier', methods: ['GET', 'POST'])]
+    public function planier(Request $request, EntityManagerInterface $entityManager): Response
+    {
+        $videnge = new Videnge();
+        $form = $this->createForm(VidengeType::class, $videnge);
+        $form->handleRequest($request);
+
+        if ($form->isSubmitted() && $form->isValid()) {
+            $videnge->setStatut(false);
+            $entityManager->persist($videnge);
+            $entityManager->flush();
+
+            return $this->redirectToRoute('app_videnge_index', [], Response::HTTP_SEE_OTHER);
+        }
+
+        return $this->render('videnge/planifier.html.twig', [
             'videnge' => $videnge,
             'form' => $form,
         ]);
