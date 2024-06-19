@@ -52,6 +52,7 @@
                         <td>{{ etiquette.disponibilite ? 'Disponible' : 'Indisponible' }}</td>
                         <td>
                             <a href="{{ path('etiquette_edit', {'id': etiquette.id}) }}" class="btn btn-warning btn-sm">Modifier</a>
+                            <a href="{{ path('etiquette_imprimer', {'id': etiquette.id}) }}" class="btn btn-primary btn-sm">Imprimer</a>
                         </td>
                     </tr>
                 {% endfor %}

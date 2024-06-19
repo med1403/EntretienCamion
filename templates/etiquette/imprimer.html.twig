@@ -1,0 +1,38 @@
+{# Template pour faire l'impression #}
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="UTF-8">
+    <title>Étiquette {{ etiquette.id }}</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+        }
+        .etiquette-container {
+            width: 100%;
+            border: 1px solid #000;
+            padding: 10px;
+            margin: 10px 0;
+        }
+        .etiquette-header {
+            font-size: 24px;
+            font-weight: bold;
+            margin-bottom: 10px;
+        }
+        .etiquette-content {
+            font-size: 18px;
+        }
+    </style>
+</head>
+<body>
+    <div class="etiquette-container">
+        <div class="etiquette-header">
+            Étiquette N° {{ etiquette.id }}
+        </div>
+        <div class="etiquette-content">
+            <p>État : {{ etiquette.etat }}</p>
+            <p>Disponibilité : {{ etiquette.disponibilite ? 'Disponible' : 'Indisponible' }}</p>
+        </div>
+    </div>
+</body>
+</html>
