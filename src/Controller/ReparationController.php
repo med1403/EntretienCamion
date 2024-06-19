@@ -9,40 +9,40 @@ use Doctrine\ORM\EntityManagerInterface;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\Response;
-use Symfony\Component\Routing\Annotation\Route;
+use Symfony\Component\Routing\Attribute\Route;
 
+#[Route('/reparation')]
 class ReparationController extends AbstractController
 {
-    #[Route('/reparation/new', name: 'reparation_new')]
+    #[Route('/', name: 'app_reparation_index', methods: ['GET'])]
+    public function index(ReparationRepository $reparationRepository): Response
+    {
+        return $this->render('reparation/index.html.twig', [
+            'reparations' => $reparationRepository->findAll(),
+        ]);
+    }
+
+    #[Route('/new', name: 'app_reparation_new', methods: ['GET', 'POST'])]
     public function new(Request $request, EntityManagerInterface $entityManager): Response
     {
         $reparation = new Reparation();
         $form = $this->createForm(ReparationType::class, $reparation);
-
         $form->handleRequest($request);
+
         if ($form->isSubmitted() && $form->isValid()) {
             $entityManager->persist($reparation);
             $entityManager->flush();
 
-            return $this->redirectToRoute('reparation_list');
+            return $this->redirectToRoute('app_reparation_index', [], Response::HTTP_SEE_OTHER);
         }
 
         return $this->render('reparation/new.html.twig', [
-            'form' => $form->createView(),
+            'reparation' => $reparation,
+            'form' => $form,
         ]);
     }
 
-    #[Route('/reparation', name: 'reparation_list')]
-    public function list(ReparationRepository $reparationRepository): Response
-    {
-        $reparations = $reparationRepository->findAll();
-
-        return $this->render('reparation/list.html.twig', [
-            'reparations' => $reparations,
-        ]);
-    }
-
-    #[Route('/reparation/{id}', name: 'reparation_show', requirements: ['id' => '\d+'])]
+    #[Route('/{id}', name: 'app_reparation_show', methods: ['GET'])]
     public function show(Reparation $reparation): Response
     {
         return $this->render('reparation/show.html.twig', [
@@ -50,30 +50,32 @@ class ReparationController extends AbstractController
         ]);
     }
 
-   /* #[Route('/reparation/search', name: 'reparation_search')]
-    public function search(Request $request, ReparationRepository $reparationRepository): Response
+    #[Route('/{id}/edit', name: 'app_reparation_edit', methods: ['GET', 'POST'])]
+    public function edit(Request $request, Reparation $reparation, EntityManagerInterface $entityManager): Response
     {
-        $criteria = $request->query->get('criteria');
-        $reparations = $reparationRepository->findByCriteria($criteria);
+        $form = $this->createForm(ReparationType::class, $reparation);
+        $form->handleRequest($request);
 
-        return $this->render('reparation/search.html.twig', [
-            'reparations' => $reparations,
-        ]);
-    }*/
+        if ($form->isSubmitted() && $form->isValid()) {
+            $entityManager->flush();
 
-    #[Route('/reparation/search', name: 'reparation_search')]
-    public function search(Request $request, ReparationRepository $reparationRepository): Response
-    {
-        $criteria = $request->query->get('criteria');
-        $reparations = [];
-
-        if ($criteria) {
-            $reparations = $reparationRepository->findByDescription($criteria);
+            return $this->redirectToRoute('app_reparation_index', [], Response::HTTP_SEE_OTHER);
         }
 
-        return $this->render('reparation/search.html.twig', [
-            'reparations' => $reparations,
-            'criteria' => $criteria,
+        return $this->render('reparation/edit.html.twig', [
+            'reparation' => $reparation,
+            'form' => $form,
         ]);
+    }
+
+    #[Route('/{id}', name: 'app_reparation_delete', methods: ['POST'])]
+    public function delete(Request $request, Reparation $reparation, EntityManagerInterface $entityManager): Response
+    {
+        if ($this->isCsrfTokenValid('delete'.$reparation->getId(), $request->getPayload()->get('_token'))) {
+            $entityManager->remove($reparation);
+            $entityManager->flush();
+        }
+
+        return $this->redirectToRoute('app_reparation_index', [], Response::HTTP_SEE_OTHER);
     }
 }

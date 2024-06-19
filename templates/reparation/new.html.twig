@@ -1,30 +1,52 @@
-{% extends 'base.html.twig' %}
+{% extends 'reparation/base.html.twig' %}
+
+{% block title %}Nouvelle Réparation{% endblock %}
+
+{% block stylesheets %}
+    <style>
+        .card {
+            border-radius: 0;
+        }
+    </style>
+{% endblock %}
+
+{% block javascripts %}
+    <script>
+        document.addEventListener('DOMContentLoaded', function () {
+            flatpickr(".js-datepicker", {
+                enableTime: true,
+                dateFormat: "Y-m-d H:i",
+            });
+        });
+    </script>
+{% endblock %}
 
 {% block body %}
-    <div class="card mt-5 shadow-sm">
+    <div class="card mt-5 shadow-sm mx-auto" style="max-width: 600px;">
         <div class="card-header">
             <h3 class="mb-0"><i class="fas fa-plus-circle"></i> Nouvelle Réparation</h3>
         </div>
         <div class="card-body">
             {{ form_start(form) }}
             <div class="form-group">
-                {{ form_label(form.incident) }}
-                {{ form_widget(form.incident, {'attr': {'class': 'form-control', 'placeholder': 'Enter incident ID'}}) }}
-            </div>
-            <div class="form-group">
-                {{ form_label(form.date_reparation) }}
-                {{ form_widget(form.date_reparation, {'attr': {'class': 'form-control', 'placeholder': 'Enter repair date'}}) }}
+                {{ form_label(form.dateReparation) }}
+                {{ form_widget(form.dateReparation, {'attr': {'class': 'form-control js-datepicker', 'placeholder': 'Enter la date de réparation'}}) }}
             </div>
             <div class="form-group">
                 {{ form_label(form.description) }}
-                {{ form_widget(form.description, {'attr': {'class': 'form-control', 'placeholder': 'Enter description'}}) }}
+                {{ form_widget(form.description, {'attr': {'class': 'form-control', 'placeholder': 'Enter la description'}}) }}
             </div>
             <div class="form-group">
                 {{ form_label(form.cout) }}
-                {{ form_widget(form.cout, {'attr': {'class': 'form-control', 'placeholder': 'Enter cost'}}) }}
+                {{ form_widget(form.cout, {'attr': {'class': 'form-control', 'placeholder': 'Enter le coût'}}) }}
+            </div>
+            <div class="form-group">
+                {{ form_label(form.incident) }}
+                {{ form_widget(form.incident, {'attr': {'class': 'form-control', 'placeholder': 'Select the incident'}}) }}
             </div>
             <button class="btn btn-primary"><i class="fas fa-save"></i> Enregistrer</button>
             {{ form_end(form) }}
+            <a href="{{ path('app_reparation_index') }}" class="btn btn-secondary mt-3"><i class="fas fa-arrow-left"></i> Retour à la liste</a>
         </div>
     </div>
 {% endblock %}
