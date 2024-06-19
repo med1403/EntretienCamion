@@ -1,0 +1,68 @@
+{% extends 'controleur/base.html.twig' %}
+
+{% block title %}Détails Contrôleur{% endblock %}
+
+{% block stylesheets %}
+    <style>
+        .table th, .table td {
+            vertical-align: middle;
+        }
+    </style>
+{% endblock %}
+
+{% block body %}
+    <div class="container mt-5">
+        <div class="card">
+            <div class="card-header">
+                <h1 class="mb-0"><i class="fas fa-info-circle"></i> Détails Contrôleur</h1>
+            </div>
+            <div class="card-body">
+                <table class="table table-bordered">
+                    <tbody>
+                        <tr>
+                            <th>Id</th>
+                            <td>{{ controleur.id }}</td>
+                        </tr>
+                        <tr>
+                            <th>Nom</th>
+                            <td>{{ controleur.nom }}</td>
+                        </tr>
+                        <tr>
+                            <th>Adresse</th>
+                            <td>{{ controleur.adresse }}</td>
+                        </tr>
+                        <tr>
+                            <th>Numéro de Téléphone</th>
+                            <td>{{ controleur.numeroDeTel }}</td>
+                        </tr>
+                        <tr>
+                            <th>Adresse Email</th>
+                            <td>{{ controleur.adresseEmail }}</td>
+                        </tr>
+                        <tr>
+                            <th>Numéro de Badge</th>
+                            <td>{{ controleur.numeroDeBadge }}</td>
+                        </tr>
+                        <tr>
+                            <th>Date de Naissance</th>
+                            <td>{{ controleur.dateDeNaissance ? controleur.dateDeNaissance|date('Y-m-d') : '' }}</td>
+                        </tr>
+                        <tr>
+                            <th>Catégories de Permis</th>
+                            <td>{{ controleur.categoriesPermis }}</td>
+                        </tr>
+                    </tbody>
+                </table>
+                <div class="mt-3">
+                    <a href="{{ path('app_controleur_index') }}" class="btn btn-secondary">
+                        <i class="fas fa-arrow-left"></i> Retour à la liste
+                    </a>
+                    <a href="{{ path('app_controleur_edit', {'id': controleur.id}) }}" class="btn btn-primary">
+                        <i class="fas fa-edit"></i> Modifier
+                    </a>
+                    {{ include('controleur/_delete_form.html.twig', { 'class': 'd-inline' }) }}
+                </div>
+            </div>
+        </div>
+    </div>
+{% endblock %}
