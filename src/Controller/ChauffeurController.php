@@ -15,12 +15,22 @@ use Symfony\Component\Routing\Attribute\Route;
 class ChauffeurController extends AbstractController
 {
     #[Route('/', name: 'app_chauffeur_index', methods: ['GET'])]
-    public function index(ChauffeurRepository $chauffeurRepository): Response
-    {
-        return $this->render('chauffeur/index.html.twig', [
-            'chauffeurs' => $chauffeurRepository->findAll(),
-        ]);
-    }
+    public function index(ChauffeurRepository $chauffeurRepository, Request $request): Response
+{
+    $search = $request->query->get('search');
+    $chauffeurs = $search 
+        ? $chauffeurRepository->createQueryBuilder('c')
+            ->where('c.nom LIKE :search OR c.prenom LIKE :search OR c.contact LIKE :search')
+            ->setParameter('search', '%'.$search.'%')
+            ->getQuery()
+            ->getResult()
+        : $chauffeurRepository->findAll();
+
+    return $this->render('chauffeur/index.html.twig', [
+        'chauffeurs' => $chauffeurs,
+    ]);
+}
+
 
     #[Route('/new', name: 'app_chauffeur_new', methods: ['GET', 'POST'])]
     public function new(Request $request, EntityManagerInterface $entityManager): Response
