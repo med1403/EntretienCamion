@@ -1,0 +1,52 @@
+{% extends 'chauffeur/base.html.twig' %}
+
+{% block title %}Nouveau Chauffeur{% endblock %}
+
+{% block stylesheets %}
+    <style>
+        .card {
+            border-radius: 0;
+        }
+    </style>
+{% endblock %}
+
+{% block javascripts %}
+    <script>
+        document.addEventListener('DOMContentLoaded', function () {
+            function flatpickr(s, param2) {
+
+            }
+
+            flatpickr(".js-datepicker", {
+                enableTime: true,
+                dateFormat: "Y-m-d H:i",
+            });
+        });
+    </script>
+{% endblock %}
+
+{% block body %}
+    <div class="card mt-5 shadow-sm mx-auto" style="max-width: 600px;">
+        <div class="card-header">
+            <h3 class="mb-0"><i class="fas fa-plus-circle"></i> Nouveau Chauffeur</h3>
+        </div>
+        <div class="card-body">
+            {{ form_start(form) }}
+            <div class="form-group">
+                {{ form_label(form.nom) }}
+                {{ form_widget(form.nom, {'attr': {'class': 'form-control', 'placeholder': 'Saisir le nom du chauffeur'}}) }}
+            </div>
+            <div class="form-group">
+                {{ form_label(form.prenom) }}
+                {{ form_widget(form.prenom, {'attr': {'class': 'form-control', 'placeholder': 'Saisir le prénom du chauffeur'}}) }}
+            </div>
+            <div class="form-group">
+                {{ form_label(form.contact) }}
+                {{ form_widget(form.contact, {'attr': {'class': 'form-control', 'placeholder': 'Saisir le contact du chauffeur'}}) }}
+            </div>
+            <button class="btn btn-primary"><i class="fas fa-save"></i> Enregistrer</button>
+            {{ form_end(form) }}
+            <a href="{{ path('app_chauffeur_index') }}" class="btn btn-secondary mt-3"><i class="fas fa-arrow-left"></i> Retour à la liste</a>
+        </div>
+    </div>
+{% endblock %}
