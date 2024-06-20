@@ -20,11 +20,7 @@ class GraissageType extends AbstractType
             ->add('kmGraissage')
             ->add('ecartType')
             ->add('nbKmRestant')
-            ->add('camion', EntityType::class, [
-                'class' => Camion::class,
-                'choice_label' => 'id',
-                'multiple' => true,
-            ])
+
         ;
     }
 
