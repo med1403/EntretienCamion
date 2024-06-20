@@ -43,8 +43,8 @@
                         <td>{{ inspection.id }}</td>
                         <td>{{ inspection.dateInspection ? inspection.dateInspection|date('Y-m-d') : '' }}</td>
                         <td>{{ inspection.resultat ? 'Passé' : 'Échoué' }}</td>
-                        <td>{{ inspection.camion.typeCamion.nom }}</td>
-                        <td>{{ inspection.camion.categorie.nom }}</td>
+                        <td>{{ inspection.camion and inspection.camion.categorie ? inspection.camion.categorie.nom : 'N/A' }}</td>
+                        <td>{{ inspection.camion and inspection.camion.typeCamion ? inspection.camion.typeCamion.nom : 'N/A' }}</td>
                         <td>{{ inspection.commentaire }}</td>
                         <td>{{ inspection.inspecteur ? inspection.inspecteur.nom : '' }}</td>
                         <td>
@@ -62,7 +62,7 @@
                     </tr>
                 {% else %}
                     <tr>
-                        <td colspan="6">Aucune Inspection </td>
+                        <td colspan="8">Aucune Inspection</td>
                     </tr>
                 {% endfor %}
                 </tbody>
