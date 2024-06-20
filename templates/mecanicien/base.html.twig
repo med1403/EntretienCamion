@@ -1,5 +1,5 @@
-<!DOCTYPE html>
-<html lang="fr">
+{% extends 'admin/base.html.twig' %}
+{% block contenu %}
 <head>
     <meta charset="UTF-8">
     <title>{% block title %}Bienvenue!{% endblock %}</title>
@@ -80,5 +80,6 @@
     });
 </script>
 {% block javascripts %}{% endblock %}
-</body>
-</html>
+
+
+{% endblock %}

@@ -1,5 +1,5 @@
-<!DOCTYPE html>
-<html lang="fr">
+{% extends 'admin/base.html.twig' %}
+{% block contenu %}
 <head>
     <meta charset="UTF-8">
     <title>{% block title %}Bienvenue!{% endblock %}</title>
@@ -45,7 +45,7 @@
     </style>
     {% block stylesheets %}{% endblock %}
 </head>
-<body>
+
 
 <nav class="navbar navbar-expand-lg navbar-dark fa-scroll-top">
     <div class="container">
@@ -87,5 +87,5 @@
     });
 </script>
 {% block javascripts %}{% endblock %}
-</body>
-</html>
+
+{% endblock %}

@@ -1,7 +1,6 @@
 {# templates/etiquette/list.html.twig #}
-
-<!DOCTYPE html>
-<html>
+{% extends 'admin/base.html.twig' %}
+{% block contenu %}
 <head>
     <meta charset="UTF-8">
     <title>Liste des étiquettes</title>
@@ -43,5 +42,6 @@
             </tbody>
         </table>
     </div>
-</body>
-</html>
+
+
+{% endblock %}

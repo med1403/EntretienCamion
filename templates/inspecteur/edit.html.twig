@@ -1,8 +1,7 @@
-{% extends 'base.html.twig' %}
-
+{% extends 'admin/base.html.twig' %}
 {% block title %}Edit Inspecteur{% endblock %}
+{% block contenu %}
 
-{% block body %}
     <h1>Edit Inspecteur</h1>
 
     {{ include('inspecteur/_form.html.twig', {'button_label': 'Update'}) }}
