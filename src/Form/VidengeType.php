@@ -27,7 +27,6 @@ class VidengeType extends AbstractType
             ->add('listPiece', EntityType::class, [
                 'class' => ListPiece::class,
                 'choice_label' => 'id',
-                'multiple' => true,
             ])
             ->add('gradeVidenge', EntityType::class, [
                 'class' => GradeVidenge::class,

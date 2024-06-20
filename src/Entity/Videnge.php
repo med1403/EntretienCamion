@@ -21,12 +21,6 @@ class Videnge
     #[ORM\ManyToMany(targetEntity: Camion::class, inversedBy: 'videnges')]
     private Collection $camion;
 
-    /**
-     * @var Collection<int, ListPiece>
-     */
-    #[ORM\ManyToMany(targetEntity: ListPiece::class, inversedBy: 'videnges')]
-    private Collection $listPiece;
-
     #[ORM\Column]
     private ?float $kmVidenge = null;
 
@@ -39,10 +33,12 @@ class Videnge
     #[ORM\Column]
     private ?bool $statut = null;
 
+    #[ORM\OneToOne(cascade: ['persist', 'remove'])]
+    private ?ListPiece $listPiece = null;
+
     public function __construct()
     {
         $this->camion = new ArrayCollection();
-        $this->listPiece = new ArrayCollection();
     }
 
     public function getId(): ?int
@@ -77,30 +73,6 @@ class Videnge
     public function removeCamion(Camion $camion): static
     {
         $this->camion->removeElement($camion);
-
-        return $this;
-    }
-
-    /**
-     * @return Collection<int, ListPiece>
-     */
-    public function getListPiece(): Collection
-    {
-        return $this->listPiece;
-    }
-
-    public function addListPiece(ListPiece $listPiece): static
-    {
-        if (!$this->listPiece->contains($listPiece)) {
-            $this->listPiece->add($listPiece);
-        }
-
-        return $this;
-    }
-
-    public function removeListPiece(ListPiece $listPiece): static
-    {
-        $this->listPiece->removeElement($listPiece);
 
         return $this;
     }
@@ -149,6 +121,18 @@ class Videnge
     public function setStatut(bool $statut): static
     {
         $this->statut = $statut;
+
+        return $this;
+    }
+
+    public function getListPiece(): ?ListPiece
+    {
+        return $this->listPiece;
+    }
+
+    public function setListPiece(?ListPiece $listPiece): static
+    {
+        $this->listPiece = $listPiece;
 
         return $this;
     }

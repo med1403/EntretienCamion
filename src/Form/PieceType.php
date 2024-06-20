@@ -18,11 +18,6 @@ class PieceType extends AbstractType
             ->add('marque')
             ->add('nbReference')
             ->add('prix_unitaire')
-            ->add('listPieces', EntityType::class, [
-                'class' => ListPiece::class,
-                'choice_label' => 'id',
-                'multiple' => true,
-            ])
         ;
     }
 

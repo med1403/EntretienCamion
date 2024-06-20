@@ -4,7 +4,6 @@ namespace App\Form;
 
 use App\Entity\ListPiece;
 use App\Entity\Piece;
-use App\Entity\Videnge;
 use Symfony\Bridge\Doctrine\Form\Type\EntityType;
 use Symfony\Component\Form\AbstractType;
 use Symfony\Component\Form\FormBuilderInterface;
@@ -20,12 +19,6 @@ class ListPieceType extends AbstractType
             ->add('piece', EntityType::class, [
                 'class' => Piece::class,
                 'choice_label' => 'id',
-                'multiple' => true,
-            ])
-            ->add('videnges', EntityType::class, [
-                'class' => Videnge::class,
-                'choice_label' => 'id',
-                'multiple' => true,
             ])
         ;
     }

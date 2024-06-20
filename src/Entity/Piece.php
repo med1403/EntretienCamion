@@ -27,17 +27,6 @@ class Piece
     #[ORM\Column]
     private ?float $prix_unitaire = null;
 
-    /**
-     * @var Collection<int, ListPiece>
-     */
-    #[ORM\ManyToMany(targetEntity: ListPiece::class, mappedBy: 'piece')]
-    private Collection $listPieces;
-
-    public function __construct()
-    {
-        $this->listPieces = new ArrayCollection();
-    }
-
     public function getId(): ?int
     {
         return $this->id;
@@ -98,30 +87,4 @@ class Piece
         return $this;
     }
 
-    /**
-     * @return Collection<int, ListPiece>
-     */
-    public function getListPieces(): Collection
-    {
-        return $this->listPieces;
-    }
-
-    public function addListPiece(ListPiece $listPiece): static
-    {
-        if (!$this->listPieces->contains($listPiece)) {
-            $this->listPieces->add($listPiece);
-            $listPiece->addPiece($this);
-        }
-
-        return $this;
-    }
-
-    public function removeListPiece(ListPiece $listPiece): static
-    {
-        if ($this->listPieces->removeElement($listPiece)) {
-            $listPiece->removePiece($this);
-        }
-
-        return $this;
-    }
 }
